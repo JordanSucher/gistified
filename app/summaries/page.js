@@ -1,34 +1,32 @@
 import SummaryCard from "../ui/Summaries/SummaryCard"
-export default function Summaries () {
+import prisma from '../prisma'
+export default async function Summaries () {
 
-    let summaries = [{
-        id: 1,
-        text: 'Summary 1',
-        subscription: {            
-            id: 1,
-            name: 'Sub 1',
-            description: 'Sub 1 description'
+      let summaries = await prisma.summary.findMany({
+        include: {
+            // publication: true,
+            episode: {
+                include: {
+                    publication: true
+                }
+            }
         }
-    }, {
-        id: 2,
-        text: 'Summary 2',
-        subscription: {
-            name: 'Sub 2',
-            description: 'Sub 2 description'            
-        }
-    }]
-
+        })
+    
     return (
-        <div className='w-full h-full'>
-            <h1>Summaries</h1>
-            <div className="w-full ">
-                {summaries.map((summary) => (
-                    <SummaryCard
-                        key={summary.id}
-                        summary={summary}
-                    />
-                ))}
+        <div className='w-full h-full max-w-[1000px] self-center'>
+            <span className="flex justify-between items-center py-2 px-4 mb-2">
+                <h1 className="text-xl m-0 p-0">Your Summaries</h1>
+            </span>
+            <div className="w-full px-4">
+            {summaries.map((summary) => (
+                <SummaryCard
+                key={summary.id}
+                summary={summary}
+            />
+            ))}
             </div>
         </div>
     )
 }
+

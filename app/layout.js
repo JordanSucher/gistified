@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <Header />
         <div className={`flex grow w-full`}>
           <Sidenav />
-          <div className='p-2 w-full h-full'>
+          <div className='p-4 w-full h-full flex flex-col'>
             {children}
           </div>
         </div>

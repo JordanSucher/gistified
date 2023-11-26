@@ -11,11 +11,11 @@ export default function UserButton() {
     return (
         <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild className='hover:cursor-pointer'>
-            <Avatar.Root className='bg-gray-500 
-            text-sm flex items-center justify-center 
-            rounded-full p-3 h-12 w-12'>
-            <Avatar.Image />
-            <Avatar.Fallback >
+            <Avatar.Root className='h-12 w-12'>
+            <Avatar.Image src={session?.user?.image} className='rounded-full'/>
+            <Avatar.Fallback className='bg-gray-300 
+            text-sm font-bold flex items-center justify-center 
+            rounded-full h-12 w-12'>
                 User
             </ Avatar.Fallback>
             </Avatar.Root>
@@ -26,9 +26,14 @@ export default function UserButton() {
             className='bg-white rounded-md shadow-lg min-w-[95px] 
             text-black text-sm p-2 m-1'>
             {!session && (
-                <DropdownMenu.Item className='hover:outline-none focus:none'>
-                    <button onClick={() => signIn('github')}>Log in with Github</button>
-                </DropdownMenu.Item>      
+                <>
+                    <DropdownMenu.Item className='hover:outline-none focus:none'>
+                        <button onClick={() => signIn('github')}>Log in with Github</button>
+                    </DropdownMenu.Item>      
+                    <DropdownMenu.Item className='hover:outline-none focus:none'>
+                        <button onClick={() => signIn('google')}>Log in with Google</button>
+                    </DropdownMenu.Item>
+                </>
             )}
 
             {session && (

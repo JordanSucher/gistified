@@ -4,8 +4,9 @@ export default function SummaryCard ({summary}) {
             <span>
                 <img src="" alt=""/> 
                 <div>
-                    <h2>{summary.subscription.name}</h2>
-                    <p>{summary.text}</p>
+                    <h2>{summary.episode.publication.title}</h2>
+                    <h3>{summary.episode.title}</h3>
+                    <p>{summary.content}</p>
                 </div>    
             </span>
         </div>

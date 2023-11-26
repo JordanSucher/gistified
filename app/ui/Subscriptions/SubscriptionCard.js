@@ -4,8 +4,8 @@ export default function SubscriptionCard ({subscription}) {
             <span>
                 <img src="" alt=""/> 
                 <div>
-                    <h2>{subscription.name}</h2>
-                    <p>{subscription.description}</p>
+                    <h2>{subscription.publication.title}</h2>
+                    <p>{subscription.publication.description}</p>
                 </div>    
             </span>
         </div>
