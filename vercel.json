@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "app/lib/openai.js": {
+        "maxDuration": 60
+      }
+    }
+  }
