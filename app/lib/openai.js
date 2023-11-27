@@ -3,6 +3,9 @@ import ffmpeg from "fluent-ffmpeg";
 import fs from "fs";
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
+
+export const maxDuration = 300;
+
 export async function generateTranscriptWithWhisper(url) {
     try {
         const response = await fetch(url);
