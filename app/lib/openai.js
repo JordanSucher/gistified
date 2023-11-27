@@ -25,7 +25,7 @@ export async function generateTranscriptWithWhisper(url) {
             ffmpeg(inputFilePath)
                 .output(outputFilePath)
                 .outputOptions(["-f segment", "-segment_time 300", "-c copy"])
-                .on("error", ()=> {
+                .on("error", (error)=> {
                     console.log("Segmentation error: ", error, error.message);
                     reject()
                 })
