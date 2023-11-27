@@ -1,4 +1,4 @@
-import OpenAI, { toFile } from "openai";
+import OpenAI from "openai";
 import ffmpeg from "fluent-ffmpeg";
 import fs from "fs";
 const openai = new OpenAI(process.env.OPENAI_API_KEY);

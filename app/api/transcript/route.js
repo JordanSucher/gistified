@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from '../../prisma'
 import { saveToBlobStorage } from "../../lib/data";
+import { client } from "../../../trigger"
+
 
 
 export async function POST(req) {
@@ -33,6 +35,12 @@ export async function POST(req) {
         });
     
         // maybe trigger job to generate summary here
+        await client.sendEvent({
+            name: "createSummary.event",
+            payload: {
+                rssFeedUrl: url
+            }
+        })
     
     
         return NextResponse.json({success: true}, {

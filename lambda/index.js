@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     // receive an mp3 url 
     let url = event.url;
 
-   //grab file, split it into segments + generate transcript
+   //grab file, split it into segments + generate transcripts
    try{
        let transcript = await generateTranscriptWithWhisper(url); 
        
@@ -28,7 +28,7 @@ exports.handler = async (event, context) => {
 
 async function generateTranscriptWithWhisper(url) {
     try {
-        const { data } = await axios.get(url, { responseType: 'arraybuffer' });
+        const { data } = await axios.get(url, { responseType: 'arraybuffer', maxRedirects: 10 });
         const buffer = Buffer.from(data);
         const randomprefix = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
@@ -57,23 +57,39 @@ async function generateTranscriptWithWhisper(url) {
 
         // Process each segment
         let transcript = "";
+
+        const maxRetries = 3; // Maximum number of retries
+
         for (let i = 0; fs.existsSync(`/tmp/${randomprefix}output-${i.toString().padStart(3, '0')}.mp3`); i++) {
             const segmentPath = `/tmp/${randomprefix}output-${i.toString().padStart(3, '0')}.mp3`;
             const file = fs.createReadStream(segmentPath);
 
             console.log("file loaded: ", segmentPath);
 
-            const transcriptionResponse = await openai.audio.transcriptions.create({
-                file: file,
-                model: "whisper-1",
-            });
+            let retryCount = 0;
+            let transcriptionResponse;
+            while (retryCount < maxRetries) {
+                try {
+                    transcriptionResponse = await openai.audio.transcriptions.create({
+                        file: file,
+                        model: "whisper-1",
+                    });
+                    console.log("transcription chunk: ", transcriptionResponse.text);
+                    transcript += transcriptionResponse.text;
+                    break; // Break the loop if the request is successful
+                } catch (error) {
+                    console.error("Error in transcription: ", error);
+                    retryCount++;
+                    console.log(`Retrying (${retryCount}/${maxRetries})...`);
+                }
+            }
 
-            console.log("transcription chunk: ", transcriptionResponse.text);
-            transcript += transcriptionResponse.text;
+            if (retryCount === maxRetries) {
+                console.log("Max retries reached. Skipping this segment.");
+            }
 
             // clean up memory
             fs.unlinkSync(segmentPath);
-
         }
 
         console.log("transcript: ", transcript);

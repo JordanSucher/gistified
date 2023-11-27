@@ -32,7 +32,8 @@ export async function POST(req) {
         await client.sendEvent({
             name: "newpod.event",
             payload: {
-                rssFeedUrl: url
+                rssFeedUrl: url,
+                title: publication.title
             }
         })
 
