@@ -5,7 +5,7 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // Set the ffmpeg path if not in dev
 if (process.env.VERCEL_ENV !== "development") {
-    ffmpeg.setFfmpegPath("/ffmpeg");
+    ffmpeg.setFfmpegPath("@/app/lib/ffmpeg");
 }
 
 export const maxDuration = 300;
