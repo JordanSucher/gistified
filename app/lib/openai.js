@@ -1,10 +1,12 @@
 import OpenAI, { toFile } from "openai";
-import ffmpegPath from "ffmpeg-static";
 import ffmpeg from "fluent-ffmpeg";
 import fs from "fs";
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-ffmpeg.setFfmpegPath(ffmpegPath);
+// Set the ffmpeg path if not in dev
+if (process.env.VERCEL_ENV !== "development") {
+    ffmpeg.setFfmpegPath("./ffmpeg");
+}
 
 export const maxDuration = 300;
 

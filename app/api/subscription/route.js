@@ -4,6 +4,8 @@ import prisma from '../../prisma'
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 import { client } from "../../../trigger"
+import ffmpegPath from "ffmpeg-static";
+
 
 
 export async function POST(req) {
