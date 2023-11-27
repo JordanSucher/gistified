@@ -38,34 +38,13 @@ client.defineJob({
         
                     // check if transcript exists
                     const transcriptExists = await doesTranscriptExist(url);
-        
-                    let transcript
-        
+                
                     if (!transcriptExists) {
+                        // trigger lambda to generate transcript
 
-                        // Get a transcript using OpenAI
-                        transcript = await generateTranscriptWithWhisper(url);
-            
-                        // // Persist the transcript to Vercel Blob Storage
-                        // let path = url + ".txt";
-                        // const blob = await saveToBlobStorage(path, transcript);
-            
-                        // // persist the blob url to pgdb
-                        // episodeRecord = await upsertEpisode(rssFeedUrl, url, pubdate, title, description, blob.url);
                     } else {
-                        // get transcript from pgdb
-                        let transcriptUrl = await getTranscriptUrlFromEpisode(url);
-                        transcript = fetch (transcriptUrl).then(res => res.text());
-                        console.log("transcript: ", transcript);
-        
-                    }
-        
-                    // get a summary and persist to pgdb
-                    // let summary = await getTranscriptSummary(transcript);
-                    // console.log("summary: ", summary);
-        
-                    // let summaryRecord = await upsertSummary(episodeRecord.id, summary);
-                    
+                        // do nothing?
+                    }                    
                 }
             )
         }
