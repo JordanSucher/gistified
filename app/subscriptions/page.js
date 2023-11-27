@@ -3,7 +3,7 @@ import AddSubscriptionButton from "../ui/Subscriptions/AddSubscriptionButton"
 import prisma from '../prisma'
 import { isThisAPodcast } from '../lib/rss'
 import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/route"
+import { authOptions } from "../api/auth/[...nextauth]/authOptions"
 
 export default async function Subscriptions () {
 
