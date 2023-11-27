@@ -8,9 +8,32 @@ export default async function Summaries () {
 
     let session = await getServerSession(authOptions)
 
-      let summaries = session ? await prisma.summary.findMany({
+    let subscriptions = session ? await prisma.subscription.findMany({
         where: {
             userId: session.user.id
+        },
+        include: {
+            publication: true
+        }
+    }) : []
+
+    let allEpisodeIds = []
+
+    for (const subscription of subscriptions) {
+        let episodes = await prisma.episode.findMany({
+            where: {
+                publicationId: subscription.publicationId
+            }
+        })
+        allEpisodeIds.push(...episodes.map(episode=>episode.id))
+
+    }
+
+      let summaries = session ? await prisma.summary.findMany({
+        where: {
+            episodeId: {
+                in: allEpisodeIds
+            }
         },
         include: {
             // publication: true,
