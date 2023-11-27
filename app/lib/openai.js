@@ -10,8 +10,8 @@ export async function generateTranscriptWithWhisper(url) {
         let buffer = Buffer.from(abuffer);
         let randomprefix = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-        const inputFilePath = randomprefix + 'input.mp3'; // Temporary file path
-        const outputFilePath = randomprefix + 'output-%03d.mp3'; // Output file pattern
+        const inputFilePath = '/tmp/' + randomprefix + 'input.mp3'; // Temporary file path
+        const outputFilePath = '/tmp/' + randomprefix + 'output-%03d.mp3'; // Output file pattern
 
         fs.writeFileSync(inputFilePath, buffer);
         abuffer = null;
@@ -35,8 +35,8 @@ export async function generateTranscriptWithWhisper(url) {
 
         // Process each segment
         let transcript = "";
-        for (let i = 0; fs.existsSync(`${randomprefix}output-${i.toString().padStart(3, '0')}.mp3`); i++) {
-            const segmentPath = `${randomprefix}output-${i.toString().padStart(3, '0')}.mp3`;
+        for (let i = 0; fs.existsSync(`/tmp/${randomprefix}output-${i.toString().padStart(3, '0')}.mp3`); i++) {
+            const segmentPath = `/tmp/${randomprefix}output-${i.toString().padStart(3, '0')}.mp3`;
             const file = fs.createReadStream(segmentPath);
 
             console.log("file loaded: ", segmentPath);
