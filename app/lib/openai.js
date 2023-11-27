@@ -26,7 +26,7 @@ export async function generateTranscriptWithWhisper(url) {
                 .output(outputFilePath)
                 .outputOptions(["-f segment", "-segment_time 300", "-c copy"])
                 .on("error", ()=> {
-                    console.log("Segmentation error");
+                    console.log("Segmentation error: ", error, error.message);
                     reject()
                 })
                 .on("end", () => {
