@@ -53,7 +53,7 @@ export default async function Subscriptions () {
     else {
         return (
             <div className='w-full max-w-[1000px] self-center flex justify-center items-center gap-4'>
-                <p className="text-lg">You haven't subscribed to anything yet. </p>
+                <p className="text-lg">You havent subscribed to anything yet. </p>
                  <AddSubscriptionButton />
             </div>
         )
