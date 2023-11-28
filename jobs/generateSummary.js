@@ -20,6 +20,9 @@ client.defineJob({
             async () => {
                 // will receive an episode url and a transcript url
                 let { episodeUrl, transcriptUrl } = payload;
+
+                console.log("episodeUrl", episodeUrl)
+                console.log("transcriptUrl", transcriptUrl)
         
                 let episode = await prisma.episode.findFirst({
                     where: {
@@ -37,6 +40,8 @@ client.defineJob({
                 })
         
                 let transcript = await fetch(transcriptUrl).then(res => res.text())
+
+                console.log("transcript", transcript.slice(0, 100))
                                 
                 let summary = await getTranscriptSummary(transcript)
 

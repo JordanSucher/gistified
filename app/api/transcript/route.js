@@ -38,7 +38,8 @@ export async function POST(req) {
         await client.sendEvent({
             name: "createSummary.event",
             payload: {
-                rssFeedUrl: url
+                transcriptUrl: blob.url,
+                episodeUrl: url
             }
         })
     

@@ -2,9 +2,7 @@ const axios = require('axios');
 const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
 const OpenAI = require('openai');
-
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-
 
 ffmpeg.setFfmpegPath('/opt/bin/ffmpeg');
 

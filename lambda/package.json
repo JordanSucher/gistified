@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {},
     "dependencies": {
+        "@huggingface/inference": "^2.6.4",
         "axios": "^1.6.2",
         "fluent-ffmpeg": "^2.1.2",
         "openai": "^4.20.0"
