@@ -61,10 +61,10 @@ client.defineJob({
                             }
                         })
                     
-                        await io.logger.info("Summary created for episode " + episode.title)
                         return "Summary created for episode " + episode.title
                     }
-                )
+                    )
+                    await io.logger.info("Summary created for episode " + episode.title)
             }
             )
 
