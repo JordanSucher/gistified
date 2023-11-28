@@ -1,4 +1,4 @@
-export const maxDuration = 300
+export const maxDuration = 300;
 
 import { createAppRoute } from "@trigger.dev/nextjs";
 import { client } from "../../../trigger";
