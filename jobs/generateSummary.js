@@ -19,46 +19,63 @@ client.defineJob({
             "create-summary",
             async () => {
                 // will receive an episode url and a transcript url
-                let { episodeUrl, transcriptUrl } = payload;
 
-                console.log("episodeUrl", episodeUrl)
-                console.log("transcriptUrl", transcriptUrl)
+                await io.runTask(
+                    "summary setup",
+                    async () => {
+                        let { episodeUrl, transcriptUrl } = payload;
         
-                let episode = await prisma.episode.findFirst({
-                    where: {
-                        url: episodeUrl
+                        console.log("episodeUrl", episodeUrl)
+                        console.log("transcriptUrl", transcriptUrl)                        
+                
+                        let episode = await prisma.episode.findFirst({
+                            where: {
+                                url: episodeUrl
+                            }
+                        })
+                
+                        // create a placeholder summary record
+                        let summaryRecord = await prisma.summary.create({
+                            data: {
+                                episodeId: episode.id,
+                                status: 'processing',
+                                content: ""
+                            }
+                        })
+                
+                        let transcript = await fetch(transcriptUrl).then(res => res.text())
+        
+                        console.log("transcript", transcript.slice(0, 100))
                     }
-                })
-        
-                // create a placeholder summary record
-                let summaryRecord = await prisma.summary.create({
-                    data: {
-                        episodeId: episode.id,
-                        status: 'processing',
-                        content: ""
+                )
+
+                await io.runTask(
+                    "generate summary",
+                    async () => {
+                        console.log("initializing summary")
+                        let summary = await getTranscriptSummary(transcript)
+                    
+                    
                     }
-                })
-        
-                let transcript = await fetch(transcriptUrl).then(res => res.text())
+                )
 
-                console.log("transcript", transcript.slice(0, 100))
-                                
-                let summary = await getTranscriptSummary(transcript)
-
-        
-                // update summary record
-                await prisma.summary.update({
-                    where: {
-                        id: summaryRecord.id
-                    },
-                    data: {
-                        content: summary,
-                        status: 'published'
+                await io.runTask(
+                    "persist summary",
+                    async () => {
+                        // update summary record
+                        await prisma.summary.update({
+                            where: {
+                                id: summaryRecord.id
+                            },
+                            data: {
+                                content: summary,
+                                status: 'published'
+                            }
+                        })
+                    
+                        await io.logger.info("Summary created for episode " + episode.title)
                     }
-                })
-            
-                await io.logger.info("Summary created for episode " + episode.title)
-
+                )
             }
             )
 
