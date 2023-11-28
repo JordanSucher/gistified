@@ -60,11 +60,11 @@ client.defineJob({
                                 status: 'published'
                             }
                         })
-                    
+                        console.log("completed summary")
                         return "Summary created for episode " + episode.title
                     }
                     )
-                    await io.logger.info("Summary created for episode " + episode.title)
+                await io.logger.info("Summary created for episode " + episode.title)
             }
             )
 
