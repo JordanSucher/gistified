@@ -6,6 +6,34 @@ import { authOptions } from "../auth/[...nextauth]/authOptions";
 import { client } from "../../../trigger"
 
 
+export async function DELETE(req) {
+    let body = await req.json()
+    console.log("body", body)
+    let userId = body.userId;
+    let publicationId = body.publicationId;
+
+    try {
+        // delete subscription
+        await prisma.subscription.delete({
+            where: {
+                userId_publicationId: {
+                    userId: userId,
+                    publicationId: publicationId
+                }
+            }
+        });
+    
+        return NextResponse.json({success: true}, {
+            status: 200
+        })
+    } catch (e) {
+        console.log(e, e.message)
+        return NextResponse.json({success: false}, {
+            status: 500
+        })
+    }
+}
+
 export async function POST(req) {
     let body = await req.json()
     let url = body.url;
@@ -24,7 +52,8 @@ export async function POST(req) {
             data: {
                 rssFeedUrl: url,
                 title: details.title,
-                description: details.description
+                description: details.description,
+                imageurl: details.imageUrl
             }
         })
 

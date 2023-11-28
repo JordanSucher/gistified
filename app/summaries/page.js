@@ -2,6 +2,8 @@ import SummaryCard from "../ui/Summaries/SummaryCard"
 import prisma from '../prisma'
 import { getServerSession } from "next-auth"
 import { authOptions } from "../api/auth/[...nextauth]/authOptions"
+import AddSubscriptionButton from "../ui/Subscriptions/AddSubscriptionButton"
+
 
 
 export default async function Summaries () {
@@ -33,10 +35,10 @@ export default async function Summaries () {
         where: {
             episodeId: {
                 in: allEpisodeIds
-            }
+            },
+            status: 'published'
         },
         include: {
-            // publication: true,
             episode: {
                 include: {
                     publication: true
@@ -45,20 +47,31 @@ export default async function Summaries () {
         }
         }) : []
     
-    return (
-        <div className='w-full h-full max-w-[1000px] self-center'>
-            <span className="flex justify-between items-center py-2 px-4 mb-2">
-                <h1 className="text-xl m-0 p-0">Your Summaries</h1>
-            </span>
-            <div className="w-full px-4">
-            {summaries.map((summary) => (
-                <SummaryCard
-                key={summary.id}
-                summary={summary}
-            />
-            ))}
+    if (summaries.length > 0) {
+        return (
+            <div className='w-full h-full max-w-[1000px] self-center'>
+                <span className="flex justify-between items-center py-2 px-4 mb-2">
+                    <h1 className="text-xl m-0 p-0">Your Summaries</h1>
+                </span>
+                <div className="w-full px-4">
+                {summaries.map((summary) => (
+                    <SummaryCard
+                    key={summary.id}
+                    summary={summary}
+                />
+                ))}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    else {
+        return (
+            <div className='w-full max-w-[1000px] self-center flex justify-center items-center gap-4'>
+                <p className="text-lg">No summaries available yet. </p> 
+                <AddSubscriptionButton />
+            </div>
+        )
+    }
 }
 

@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className + ' flex flex-col'}>
+      <body className={inter.className + ' flex flex-col bg-gray-100'}>
         <Header />
         <div className={`flex grow w-full`}>
           <Sidenav />

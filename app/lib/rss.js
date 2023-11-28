@@ -17,9 +17,11 @@ export async function getPodDetails(url) {
     try {
         let parser = new Parser();
         let feed = await parser.parseURL(url);
+        let imageUrl = feed.image.url
         let details = {
             title: feed.title,
-            description: feed.description
+            description: feed.description,
+            imageUrl: imageUrl
         }
         return details
     }

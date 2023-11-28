@@ -102,6 +102,7 @@ model Publication {
   id Int @id @default(autoincrement())
   title String
   description String?
+  imageurl String?
   episodes Episode[]
   subscriptions Subscription[]
   rssFeedUrl String

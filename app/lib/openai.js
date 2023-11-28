@@ -1,3 +1,6 @@
+export const maxDuration = 300;
+
+
 import OpenAI from "openai";
 import ffmpeg from "fluent-ffmpeg";
 import fs from "fs";
@@ -8,7 +11,6 @@ if (process.env.VERCEL_ENV !== "development") {
     ffmpeg.setFfmpegPath("@/app/lib/ffmpeg");
 }
 
-export const maxDuration = 300;
 
 export async function generateTranscriptWithWhisper(url) {
     try {
