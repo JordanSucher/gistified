@@ -9,10 +9,12 @@ export default function SubscriptionCard ({subscription}) {
                 <div className="ml-4 flex flex-col align-middle">
                     <span className="flex justify-between items-center">
                         <h2 className="text-md font-bold">{subscription.publication.title}</h2>
-                        <RemoveSubscriptionButton subscription={subscription} />
                     </span>
-                    <h2 className="text-sm">{subscription.publication.description}</h2>
+                    <h2 className="text-sm w-[95%]">{subscription.publication.description}</h2>
                 </div>    
+                <div>
+                    <RemoveSubscriptionButton subscription={subscription} />    
+                </div>
             </span>
         </div>
     )

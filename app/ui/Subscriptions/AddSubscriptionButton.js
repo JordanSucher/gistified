@@ -3,6 +3,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Cross2Icon } from "@radix-ui/react-icons"
+
 
 
 export default function AddSubscriptionButton () {
@@ -35,7 +37,7 @@ export default function AddSubscriptionButton () {
                 })
             })
             // refresh data on this page
-            await router.refresh()
+            router.refresh()
         }
     }   
 
@@ -50,7 +52,7 @@ export default function AddSubscriptionButton () {
                     <span className='w-full flex justify-between '>
                         <Dialog.Title className='DialogTitle'>Add Subscription</Dialog.Title>
                         <Dialog.Close asChild>
-                        <button className='self-right'>x</button>
+                            <Cross2Icon className="rounded-md w-6 h-6 text-gray-500 hover:cursor-pointer hover:bg-slate-200 p-1 self-right" />
                         </Dialog.Close>
                     </span>
                     <form className='flex flex-col items-end gap-2 my-1' onSubmit={handleSubmit}>

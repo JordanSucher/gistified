@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 export default function RemoveSubscriptionButton ({subscription}) {
     const [open, setOpen] = useState(false)
     const router = useRouter()
-    
+
     const handleRemove = async () => {
 
         console.log("subscription", subscription)
@@ -35,7 +35,7 @@ export default function RemoveSubscriptionButton ({subscription}) {
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-                <Cross2Icon className="w-6 h-6 text-gray-500 hover:cursor-pointer hover:bg-slate-200 p-1" />
+                <Cross2Icon className="w-6 h-6 text-gray-500 rounded-md hover:cursor-pointer hover:bg-slate-200 p-1" />
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className='DialogOverlay'/>
@@ -43,7 +43,7 @@ export default function RemoveSubscriptionButton ({subscription}) {
                     <span className='w-full flex justify-between '>
                         <Dialog.Title className='DialogTitle'>Remove Subscription?</Dialog.Title>
                         <Dialog.Close asChild>
-                        <button className='self-right'>x</button>
+                            <Cross2Icon className="rounded-md w-6 h-6 text-gray-500 hover:cursor-pointer hover:bg-slate-200 p-1 self-right" />
                         </Dialog.Close>
                     </span>
                     <button 
