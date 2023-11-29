@@ -38,6 +38,7 @@ body {
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 40;
 }
 
 .DialogContent {
@@ -53,6 +54,7 @@ body {
   max-height: 85vh;
   padding: 25px;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
 }
 .DialogContent:focus {
   outline: none;
@@ -101,6 +103,7 @@ body {
   position: relative;
   box-shadow: 0 2px 10px var(--black-a7);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  z-index: 0;
 }
 
 .SwitchRoot[data-state='checked'] {
@@ -117,6 +120,7 @@ body {
   transition: transform 100ms;
   transform: translateX(2px);
   will-change: transform;
+  z-index: 1;
 }
 .SwitchThumb[data-state='checked'] {
   transform: translateX(19px);

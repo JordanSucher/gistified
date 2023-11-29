@@ -8,7 +8,7 @@ import Link from "next/link"
 export default function Header() {
     return (
         <SessionProvider>
-            <header className="bg-gray-100 px-7 py-4 flex justify-between items-center text-black text-xxl">
+            <header className="bg-gray-100 px-7 py-4 flex justify-between items-center text-black text-xxl fixed top-0 left-0 right-0 z-20">
             <Link href="/" className="font-bold text-3xl">Gistification</Link>
             <nav>
             <NavigationMenu.Root>
@@ -23,6 +23,7 @@ export default function Header() {
             </NavigationMenu.Root>
             </nav>
             </header>
+
         </SessionProvider>  
     )
 }

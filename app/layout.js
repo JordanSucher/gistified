@@ -15,9 +15,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className + ' flex flex-col bg-gray-100'}>
         <Header />
-        <div className={`flex grow w-full`}>
+        <div className={`flex grow w-full mt-[100px]`}>
           <Sidenav />
-          <div className='py-3 px-1 pr-20 w-full h-full flex flex-col'>
+          <div className='py-3 px-1 ml-5 pr-20 w-full h-full flex flex-col'>
             {children}
           </div>
         </div>

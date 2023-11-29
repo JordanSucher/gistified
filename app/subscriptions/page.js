@@ -34,12 +34,12 @@ export default async function Subscriptions () {
 
     if (subscriptions.length > 0) {
         return (
-            <div className='w-full h-full max-w-[1000px] self-center'>
+            <div className='w-full h-full max-w-[1000px] self-center mr-24'>
                 <span className="flex justify-between items-center py-2 px-4 mb-2">
                     <h1 className="text-xl m-0 p-0">Your Subscriptions</h1>
                     <AddSubscriptionButton />
                 </span>
-                <div className="w-full px-4">
+                <div className="w-full pr-4">
                     {subscriptions.map((subscription, index) => (
                         <SubscriptionCard
                             key={index}

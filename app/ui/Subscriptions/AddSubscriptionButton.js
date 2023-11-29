@@ -55,6 +55,7 @@ export default function AddSubscriptionButton () {
                             <Cross2Icon className="rounded-md w-6 h-6 text-gray-500 hover:cursor-pointer hover:bg-slate-200 p-1 self-right" />
                         </Dialog.Close>
                     </span>
+                    <Dialog.Description className='DialogDescription'>Only podcast feeds are supported.</Dialog.Description>
                     <form className='flex flex-col items-end gap-2 my-1' onSubmit={handleSubmit}>
                         <input type="url" name="url" placeholder="Enter rss feed url" className='w-[300px] bg-gray-100 rounded-md self-start p-1 px-2 mt-2'/>
                         {formError && <p className='text-red-500 text-sm self-start px-1'>Invalid podcast feed</p>}

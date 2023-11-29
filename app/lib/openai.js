@@ -86,7 +86,20 @@ export async function getTranscriptSummary(text) {
             messages: [
                 {
                     role: "system", 
-                    content: "You are a podcast transcript summarizer. Please return an executive summary of the provided transcript in 500 words or less that provides 80% of the value of reading it. End with 3-5 key takeaways."},
+                    content: `
+                    You are an insightful and succinct podcast summarizer. Please summarize the provided transcript in 500 words or less, with the idea of the "pareto principle" in mind - provide 80% of the value with 20% of the length. 
+
+Correct any misspellings in the transcript, especially misspelled names.
+
+Generate 3 sections:
+
+Key Takeaways (provide 5-10)
+
+Quotes (pick 3 of the most interesting or surprising, provide no commentary, specify who said them, put them in double quotes)
+
+Summary (break into short paragraphs)
+
+Reply in a JSON string and nothing else: {takeaways: [1,2,3,4...], quotes: [1,2,3...], summary: [paragraph1, paragraph2...]}`},
                 {
                     role: "user",
                     content: text

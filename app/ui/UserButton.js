@@ -9,10 +9,10 @@ export default function UserButton() {
     const {data: session} = useSession();
 
     return (
-        <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild className='hover:cursor-pointer'>
-            <Avatar.Root className='h-12 w-12'>
-            <Avatar.Image src={session?.user?.image} className='rounded-full'/>
+        <DropdownMenu.Root className='z-30'>
+        <DropdownMenu.Trigger asChild className='hover:cursor-pointer z-30'>
+            <Avatar.Root className='h-12 w-12 z-30'>
+            <Avatar.Image src={session?.user?.image} className='rounded-full z-30'/>
             <Avatar.Fallback className='bg-gray-300 
             text-sm font-bold flex items-center justify-center 
             rounded-full h-12 w-12'>
@@ -24,20 +24,20 @@ export default function UserButton() {
         <DropdownMenu.Portal>
           <DropdownMenu.Content 
             className='bg-white rounded-md shadow-lg min-w-[95px] 
-            text-black text-sm p-2 m-1'>
+            text-black text-sm p-2 m-1 z-30'>
             {!session && (
                 <>
-                    <DropdownMenu.Item className='hover:outline-none focus:none'>
+                    <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
                         <button onClick={() => signIn('github')}>Log in with Github</button>
                     </DropdownMenu.Item>      
-                    <DropdownMenu.Item className='hover:outline-none focus:none'>
+                    <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
                         <button onClick={() => signIn('google')}>Log in with Google</button>
                     </DropdownMenu.Item>
                 </>
             )}
 
             {session && (
-                <DropdownMenu.Item className='hover:outline-none focus:none'>
+                <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
                     <button onClick={() => signOut()}>Log out</button>
                 </DropdownMenu.Item>
             )}
