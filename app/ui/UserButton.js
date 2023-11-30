@@ -3,6 +3,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Avatar from '@radix-ui/react-avatar';
 import {useSession, signIn, signOut} from 'next-auth/react';
+import Link from 'next/link'
 
 
 export default function UserButton() {
@@ -37,9 +38,17 @@ export default function UserButton() {
             )}
 
             {session && (
-                <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
-                    <button onClick={() => signOut()}>Log out</button>
-                </DropdownMenu.Item>
+                <>
+                    <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
+                        <button onClick={() => signOut()}>Log out</button>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
+                        <Link href="/subscriptions">Subscriptions</Link>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
+                        <Link href="/summaries">Summaries</Link>
+                    </DropdownMenu.Item>
+                </>
             )}
           
           </DropdownMenu.Content>

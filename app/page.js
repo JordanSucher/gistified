@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <SessionProvider>
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-10 md:p-24">
      <div>
      </div>
     </main>

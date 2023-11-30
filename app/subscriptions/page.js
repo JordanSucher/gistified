@@ -34,7 +34,7 @@ export default async function Subscriptions () {
 
     if (subscriptions.length > 0) {
         return (
-            <div className='w-full h-full max-w-[1000px] self-center mr-24'>
+            <div className='w-full h-full max-w-[1000px] self-center md:mr-24'>
                 <span className="flex justify-between items-center py-2 px-4 mb-2">
                     <h1 className="text-xl m-0 p-0">Your Subscriptions</h1>
                     <AddSubscriptionButton />

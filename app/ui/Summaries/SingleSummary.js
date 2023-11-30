@@ -26,7 +26,7 @@ export default function SingleSummary({id}) {
             let response = await fetch(`/api/summary/?id=${id}`)
             let curr = await response.json()
             setSummary(curr)
-            let cont = JSON.parse(curr.content)
+            let cont = JSON.parse(curr.content.replace("```json", "").replace("```", ""))
             setContent(cont)
         }
         fetchSummary()
@@ -64,7 +64,7 @@ export default function SingleSummary({id}) {
 
                 <div className="pl-8">
                     {content.quotes.map((line, i) => (
-                            <p key={i} className="mb-4 Quote">{line}</p>
+                            <p key={i} className="mb-4 md:Quote">{line}</p>
                     ))}
                 </div>
 

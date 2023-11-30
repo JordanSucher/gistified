@@ -51,8 +51,8 @@ export default async function Summaries () {
     
     if (summaries.length > 0) {
         return (
-            <div className='w-full h-full max-w-[1000px] self-center mr-24'>
-                <span className="flex justify-between items-center py-2 pr-4 mb-2">
+            <div className='w-full h-full max-w-[1000px] self-center md:mr-24'>
+                <span className="flex-col md:flex-row flex justify-between items-center py-2 pr-4 mb-2">
                     <h1 className="text-xl m-0 p-0">Your Summaries</h1>
                     <ReadFilter />
                 </span>

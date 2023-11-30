@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
         <Header />
         <div className={`flex grow w-full mt-[100px]`}>
           <Sidenav />
-          <div className='py-3 px-1 ml-5 md:pr-20 w-full h-full flex flex-col items-center md:items-start'>
+          <div className='py-3 px-1 md:ml-5 md:pr-20 w-full h-full flex flex-col items-center md:items-start'>
             {children}
           </div>
         </div>
