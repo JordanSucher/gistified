@@ -28,6 +28,7 @@
     "aws-sdk": "^2.1504.0",
     "base-64": "^1.0.0",
     "fluent-ffmpeg": "^2.1.2",
+    "jsonrepair": "^3.4.1",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
     "node-mailjet": "^6.0.5",

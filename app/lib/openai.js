@@ -95,7 +95,7 @@ Generate 3 sections:
 
 Key Takeaways (provide 5-10)
 
-Quotes (pick 3 of the most interesting or surprising, provide no commentary, specify who said them, put them in double quotes)
+Quotes (pick 3 of the most interesting or surprising, provide no commentary, specify who said them. Wrap the quote in single quotes)
 
 Summary (break into short paragraphs)
 

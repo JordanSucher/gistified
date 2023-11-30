@@ -6,6 +6,7 @@ import { DotFilledIcon } from "@radix-ui/react-icons"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { jsonrepair } from "jsonrepair"
 
 export default function SummaryCard ({summary}) {
 
@@ -14,8 +15,20 @@ export default function SummaryCard ({summary}) {
     let [expanded, setExpanded] = useState(true)
     let [readStatus, setReadStatus] = useState('false')
     let [readFilter, setReadFilter] = useState(false)
-    let [content, setContent] = useState(JSON.parse(summary.content.replace("```json", "").replace("```", "")) || null)
+    let [content, setContent] = useState(false)
  
+    useEffect(() => {
+        const grabContent = async () => {
+            try {
+                let cont = JSON.parse(summary.content.replace("```json", "").replace("```", ""))
+                setContent(cont)
+            } catch (error) {
+                console.log("error", error)
+            }
+        }
+        grabContent()
+    })
+
     useEffect(() => {
         let currReadStatus = localStorage.getItem(`readStatus_${summary.id}`)
         let currReadFilter = localStorage.getItem("readFilter")
@@ -48,7 +61,7 @@ export default function SummaryCard ({summary}) {
     }
     else {
         return (
-            <>
+            content && <>
                 <div className='p-4 bg-gray-100 rounded-md w-[100%] flex flex-col'>
                     <span className="flex justify-start items-center -ml-10">
                         {!expanded && <TriangleRightIcon onClick={()=>setExpanded(true)} className="hover:cursor-pointer select-none w-10 h-10 text-gray-500" />}
