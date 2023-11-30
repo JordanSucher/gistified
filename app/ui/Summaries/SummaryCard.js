@@ -27,7 +27,7 @@ export default function SummaryCard ({summary}) {
             }
         }
         grabContent()
-    })
+    },[])
 
     useEffect(() => {
         let currReadStatus = localStorage.getItem(`readStatus_${summary.id}`)
@@ -95,8 +95,8 @@ export default function SummaryCard ({summary}) {
                                     <p key={i} className="Quote mb-4">{line}</p>
                             ))}
 
-                            <Link href={`/summaries/${summary.id}`}>
-                                <p className="text-blue-500 hover:cursor-pointer hover:underline">Read More</p>
+                            <Link href={`/summaries/${summary.id}`} className="hover:cursor-pointer hover:underline text-blue-500">
+                                Read More
                             </Link>
 
                         </div>
