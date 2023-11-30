@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 
-  let session = getServerSession(authOptions)
+  let { data: session } = getServerSession(authOptions)
 
   if (session && session.user) return (
     <html lang="en">
