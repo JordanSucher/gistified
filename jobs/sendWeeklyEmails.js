@@ -10,7 +10,7 @@ import Mailjet from 'node-mailjet';
 
 
 client.defineJob({
-    id: "send-daily-emails",
+    id: "send-weekly-emails",
     name: "Send emails",
     version: "0.0.1",
     trigger: cronTrigger({

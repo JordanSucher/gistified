@@ -6,7 +6,6 @@ import { DotFilledIcon } from "@radix-ui/react-icons"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { jsonrepair } from "jsonrepair"
 
 export default function SummaryCard ({summary}) {
 
