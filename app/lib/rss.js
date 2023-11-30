@@ -17,7 +17,7 @@ export async function getPodDetails(url) {
     try {
         let parser = new Parser();
         let feed = await parser.parseURL(url);
-        let imageUrl = feed.image.url
+        let imageUrl = feed.image?.url || feed.itunes?.image || null
         let details = {
             title: feed.title,
             description: feed.description,
@@ -51,6 +51,7 @@ export async function getLatestEpisodes(url) {
 
     return feed;
 }
+
 
 // getPublication('https://www.thisamericanlife.org/podcast/rss.xml')
 

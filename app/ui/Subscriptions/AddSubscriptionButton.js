@@ -33,6 +33,7 @@ export default function AddSubscriptionButton () {
         e.preventDefault()
         // check if url is a podcast
         let url = e.target.url.value
+        console.log("url", url)
         let result = await fetch(`/api/publication?url=${url}`)
         let isPodcast = await result.json()
         console.log("isPodcast", isPodcast.isPodcast)

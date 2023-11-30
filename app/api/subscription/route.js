@@ -37,6 +37,8 @@ export async function DELETE(req) {
 export async function POST(req) {
     let body = await req.json()
     let url = body.url;
+
+    console.log("url: ", url)
    
     // check if URL exists in DB
     let publication = await prisma.publication.findFirst({
