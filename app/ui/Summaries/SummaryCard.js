@@ -11,10 +11,10 @@ export default function SummaryCard ({summary}) {
 
     const router = useRouter()
 
-    let [expanded, setExpanded] = useState(false)
+    let [expanded, setExpanded] = useState(true)
     let [readStatus, setReadStatus] = useState('false')
     let [readFilter, setReadFilter] = useState(false)
-    let [content, setContent] = useState(JSON.parse(summary.content) || null)
+    let [content, setContent] = useState(JSON.parse(summary.content.replace("```json", "").replace("```", "")) || null)
  
     useEffect(() => {
         let currReadStatus = localStorage.getItem(`readStatus_${summary.id}`)

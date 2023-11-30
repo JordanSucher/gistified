@@ -22,7 +22,7 @@ client.defineJob({
         // get all users with daily subscriptions
         let users = await prisma.user.findMany({
             where: {
-                emailPreference: "daily"
+                emailPreference: "weekly"
             }
         })
 
