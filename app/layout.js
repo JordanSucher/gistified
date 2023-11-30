@@ -6,6 +6,7 @@ import LoggedOut from './ui/LoggedOut'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/authOptions'
 import { signIn } from 'next-auth/react'
+import prisma from './prisma'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,11 +17,11 @@ export const metadata = {
 
 
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
 
-  let { data: session } = getServerSession(authOptions)
+  let session = await getServerSession(authOptions)
 
-  if (session && session.user) return (
+  if (  session ) return (
     <html lang="en">
       <body className={inter.className + ' flex flex-col bg-gray-100'}>
         <Header />
