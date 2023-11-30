@@ -73,7 +73,7 @@ client.defineJob({
                             return ""
                         }
                     }).filter((summary) => {
-                        return summary.content !== ""
+                        return summary !== ""
                     })
                     console.log("summaries: ", summaries)
 
