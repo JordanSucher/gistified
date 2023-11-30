@@ -62,7 +62,7 @@ client.defineJob({
                         }
                     })
 
-                    summaries = summaries.map(async (summary) => {
+                    summaries = summaries.map((summary) => {
                         try {
                             return {
                                 ...summary,
@@ -75,7 +75,6 @@ client.defineJob({
                     }).filter((summary) => {
                         return summary !== ""
                     })
-                    console.log("summaries: ", summaries)
 
 
                     const request = mailjet.post('send', {'version': 'v3.1'})

@@ -63,12 +63,18 @@ client.defineJob({
                     })
 
                     summaries = summaries.map((summary) => {
-                        return {
-                            ...summary,
-                            content: JSON.parse(summary.content)
+                        try {
+                            return {
+                                ...summary,
+                                content: JSON.parse(summary.content)
+                            }
+                        } catch (error) {
+                            console.log("error", error)
+                            return ""
                         }
+                    }).filter((summary) => {
+                        return summary !== ""
                     })
-                    console.log("summaries: ", summaries)
 
 
                     const request = mailjet.post('send', {'version': 'v3.1'})
