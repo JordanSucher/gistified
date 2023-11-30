@@ -62,11 +62,18 @@ client.defineJob({
                         }
                     })
 
-                    summaries = summaries.map((summary) => {
-                        return {
-                            ...summary,
-                            content: JSON.parse(summary.content)
+                    summaries = summaries.map(async (summary) => {
+                        try {
+                            return {
+                                ...summary,
+                                content: JSON.parse(summary.content)
+                            }
+                        } catch (error) {
+                            console.log("error", error)
+                            return ""
                         }
+                    }).filter((summary) => {
+                        return summary.content !== ""
                     })
                     console.log("summaries: ", summaries)
 
