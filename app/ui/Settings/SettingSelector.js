@@ -65,6 +65,8 @@ const SettingSelector = ({emailPreference, id}) => {
       </Select.Item>
     );
   });
+
+  SelectItem.displayName = 'SelectItem';
   
   export default SettingSelector;
   

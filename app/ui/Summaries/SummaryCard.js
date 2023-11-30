@@ -27,7 +27,7 @@ export default function SummaryCard ({summary}) {
         if (currReadFilter) {
             setReadFilter(currReadFilter)
         }
-    }, [summary])
+    }, [summary, readStatus, readFilter])
 
     const toggleReadStatus = () => {
         let curr = localStorage.getItem(`readStatus_${summary.id}`)
