@@ -71,7 +71,7 @@ export default function SummaryCard ({summary}) {
                     </span>
     
                     {expanded && 
-                        <div className="mt-5 w-[95%]">
+                        <div className="flex flex-col mt-5 w-[95%]">
                             {content.takeaways.slice(0,3).map((line, i) => (
                                 <ul className="list-disc" key={i}>
                                     <li key={i} className="mb-4 ml-4 align-middle list-item">{line}</li>
@@ -79,7 +79,7 @@ export default function SummaryCard ({summary}) {
                             ))}
 
                             {content.quotes.slice(0,1).map((line, i) => (
-                                    <p key={i} className="mb-4">{line}</p>
+                                    <p key={i} className="Quote mb-4">{line}</p>
                             ))}
 
                             <Link href={`/summaries/${summary.id}`}>

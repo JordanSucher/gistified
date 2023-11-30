@@ -37,7 +37,7 @@ export default function SingleSummary({id}) {
     
     return (
         Summary &&
-        <div className='p-4 bg-gray-100 rounded-md w-[70%] flex flex-col'>
+        <div className='p-4 bg-gray-100 rounded-md max-w-[900px] flex flex-col'>
              <span className="flex justify-start items-center">
                 <img className="w-[70px] h-[70px] select-none" src={Summary?.episode?.publication.imageurl} alt=""/> 
                 <span className="flex justify-between items-center w-full">
@@ -56,22 +56,18 @@ export default function SingleSummary({id}) {
             
             
             <div className="mt-5 w-full">
-                <h2 className="text-xl mb-4">Takeaways</h2>
-
-                <div className="pl-8">  
+                <ul className="pl-8 list-disc">  
                     {content.takeaways.map((line, i) => (
-                            <p key={i} className="mb-4">{line}</p>
+                            <li key={i} className="mb-4 list-item">{line}</li>
                     ))}
-                </div>
+                </ul>
 
-                <h2 className="text-xl  mb-4">Quotes</h2>
                 <div className="pl-8">
                     {content.quotes.map((line, i) => (
-                            <p key={i} className="mb-4">{line}</p>
+                            <p key={i} className="mb-4 Quote">{line}</p>
                     ))}
                 </div>
 
-                <h2 className="text-xl mb-4">Summary</h2>
                 <div className="pl-8">
                     {content.summary.map((line, i) => (
                         <p key={i} className="mb-4">{line}</p>

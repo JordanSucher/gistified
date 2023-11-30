@@ -42,6 +42,7 @@ model User {
   image       String?
   password    String?
   name        String?
+  emailPreference EmailPreference @default(never)
   summaries   UserSummary[]
   subscriptions Subscription[]
   accounts      Account[]
@@ -111,4 +112,10 @@ model Publication {
 enum SummaryStatus {
   processing
   published
+}
+
+enum EmailPreference {
+  never
+  daily
+  weekly
 }

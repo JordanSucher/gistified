@@ -11,16 +11,15 @@ AWS.config.update({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: 'us-east-2'
 })
-    
-    
-    client.defineJob({
-        id: "fetch-episodes",
-        name: "Retrieve new episodes of all podcasts",
-        version: "0.0.2",
-        trigger: intervalTrigger({
-            seconds: 3600,
-        })
-    ,
+
+
+client.defineJob({
+    id: "fetch-episodes",
+    name: "Retrieve new episodes of all podcasts",
+    version: "0.0.2",
+    trigger: intervalTrigger({
+        seconds: 3600,
+    }),
 
     run: async (payload, io, ctx) => {
 
@@ -80,7 +79,5 @@ AWS.config.update({
                 }
             )
         }
-    
-
     }
 })

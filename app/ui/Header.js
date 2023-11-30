@@ -11,7 +11,7 @@ export default function Header() {
             <header className="bg-gray-100 px-7 py-4 flex justify-between items-center text-black text-xxl fixed top-0 left-0 right-0 z-20">
             <Link href="/" className="font-bold text-3xl">Gistification</Link>
             <nav>
-            <NavigationMenu.Root>
+            <NavigationMenu.Root className="mx-5">
                 <NavigationMenu.List className="flex space-x-4">
                 <NavigationMenu.Item>
                     <NavigationMenu.Trigger asChild>

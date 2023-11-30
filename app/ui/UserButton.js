@@ -10,7 +10,7 @@ export default function UserButton() {
 
     return (
         <DropdownMenu.Root className='z-30'>
-        <DropdownMenu.Trigger asChild className='hover:cursor-pointer z-30'>
+        <DropdownMenu.Trigger asChild className='hover:cursor-pointer'>
             <Avatar.Root className='h-12 w-12 z-30'>
             <Avatar.Image src={session?.user?.image} className='rounded-full z-30'/>
             <Avatar.Fallback className='bg-gray-300 
@@ -21,10 +21,10 @@ export default function UserButton() {
             </Avatar.Root>
         </ DropdownMenu.Trigger>
     
-        <DropdownMenu.Portal>
+        <DropdownMenu.Portal className='mr-6'>
           <DropdownMenu.Content 
             className='bg-white rounded-md shadow-lg min-w-[95px] 
-            text-black text-sm p-2 m-1 z-30'>
+            text-black text-sm p-2 m-1 z-30 mr-6 mt-2'>
             {!session && (
                 <>
                     <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
