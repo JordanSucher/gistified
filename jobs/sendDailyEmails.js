@@ -66,7 +66,7 @@ client.defineJob({
                         try {
                             return {
                                 ...summary,
-                                content: JSON.parse(summary.content)
+                                content: JSON.parse(summary.content.replace("```json", "").replace("```", ""))
                             }
                         } catch (error) {
                             console.log("error", error)
@@ -75,7 +75,6 @@ client.defineJob({
                     }).filter((summary) => {
                         return summary !== ""
                     })
-
 
                     const request = mailjet.post('send', {'version': 'v3.1'})
                     .request({
@@ -98,13 +97,20 @@ client.defineJob({
                                 ${summaries.map((summary) => {
                                     return (
                                     `
-                                    <a href=https://gistifier.vercel.app/summaries/${summary.id}>
-                                    <h1>${summary.episode.title}</h1>
-                                    </a>
-                                    <h2>${summary.episode.publication.title}</h2>
+                                    <span style="display: flex; align-items: center;">
+                                        <img style="width: 60px; height: 60px; margin-right: 10px" src=${summary.episode.publication.imageurl} />
+                                        <div>
+                                            <a href=https://gistifier.vercel.app/summaries/${summary.id}>
+                                            <h2 style="margin: 0; padding: 0">${summary.episode.title}</h1>
+                                            </a>
+                                            <h3 style="margin: 0; padding: 0">${summary.episode.publication.title}</h2>
+                                        </div>
+                                    </span>
+                                    <ul>
                                     ${summary.content.takeaways.map((takeaway) => {
-                                        return `<p>${takeaway}</p>`
+                                        return `<li>${takeaway}</li>`
                                     }).join("\n")}
+                                    </ul>
                                     `
                                     )
                                 }).join("\n")}
