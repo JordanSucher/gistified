@@ -44,10 +44,13 @@ export default async function Summaries () {
                     publication: true
                 }
             }
+        },
+        orderBy: {
+            episode:{
+                publishedAt: 'desc'
+            }
         }
         }) : []
-
-        summaries = Array.from(summaries).reverse()
     
     if (summaries.length > 0) {
         return (

@@ -11,7 +11,7 @@ export default function SummaryCard ({summary}) {
 
     const router = useRouter()
 
-    let [expanded, setExpanded] = useState(true)
+    let [expanded, setExpanded] = useState(false)
     let [readStatus, setReadStatus] = useState('false')
     let [readFilter, setReadFilter] = useState(false)
     let [content, setContent] = useState(false)

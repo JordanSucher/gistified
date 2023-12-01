@@ -133,7 +133,9 @@ client.defineJob({
 
         }
         
+        console.log("finished sending daily emails")
         return true
+        
 
     }
 })
