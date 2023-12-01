@@ -16,11 +16,13 @@ export default function Sidenav() {
         setCurrPage(pathname.replace("/", ""))
     }, [pathname])
     
+    
     return (
-        <NavigationMenu.Root className="hidden md:w-[200px] lg:w-[400px] py-2 px-8 md:flex flex-col bg-gray-100 h-full text-black text-md">
+        <NavigationMenu.Root className="z-30 hidden md:w-[200px] lg:w-[400px] py-2 px-8 md:flex flex-col bg-gray-100 h-full text-black text-md">
             <hr className="h-[2px] fixed top-[90px] md:w-[150px] lg:w-[250px] mb-6 bg-gray-300" />
-            <NavigationMenu.List className="fixed w-[200px]">
-            <NavigationMenu.Item className={"py-2 px-2 mb-2 rounded-md" + (currPage === "subscriptions" ? " bg-slate-200" : "")}>
+            <NavigationMenu.List className="fixed w-[100px] md:w-[150px] lg:w-[250px]">
+            
+            <NavigationMenu.Item className={"py-2 px-2 mb-2 rounded-md w-full" + (currPage === "subscriptions" ? " bg-slate-200" : "")}>
                 <NavigationMenu.Trigger asChild>
                     <Link href={"/subscriptions"}>
                         <span className={"flex items-center hover:text-blue-500 w-full" }>
@@ -36,7 +38,7 @@ export default function Sidenav() {
                     <Link href="/summaries">
                         <span className="flex items-center hover:text-blue-500">
                             <ListBulletIcon className="w-4 h-4 mr-2" />
-                            Summaries
+                            Inbox
                         </span>
                     </Link>
                 </NavigationMenu.Trigger>

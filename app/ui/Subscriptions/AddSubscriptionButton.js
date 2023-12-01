@@ -5,8 +5,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Cross2Icon } from "@radix-ui/react-icons"
 import SubscriptionSelector from './SubscriptionSelector'
-
-
+import SelectSearch from 'react-select-search'
 
 export default function AddSubscriptionButton () {
     const [formError, setFormError] = useState(false)
@@ -15,14 +14,13 @@ export default function AddSubscriptionButton () {
 
     const [publications, setPublications] = useState([])
     const [selected, setSelected] = useState()
-    const [fromUrl, setFromUrl] = useState(false)
+    const [fromUrl, setFromUrl] = useState('existing')
 
     useEffect(() => {
         const fetchPublications = async () => {
-            const res = await fetch('/api/publications')
+            const res = await fetch('/api/publications?new=true')
             const data = await res.json()
             setPublications(data)
-            console.log("publications", data)
         }
 
 
@@ -31,12 +29,16 @@ export default function AddSubscriptionButton () {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        let url
         // check if url is a podcast
-        let url = e.target.url.value
-        console.log("url", url)
+        if (e.target.url && e.target.url.value) {
+            url = e.target.url.value
+        } else {
+            url = selected
+        }
         let result = await fetch(`/api/publication?url=${url}`)
         let isPodcast = await result.json()
-        console.log("isPodcast", isPodcast.isPodcast)
+
         if(isPodcast.isPodcast == false) {
             setFormError(true)
             return
@@ -62,7 +64,7 @@ export default function AddSubscriptionButton () {
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-                <button className='active:bg-black active:text-white px-2 py-1 bg-blue-400 rounded-md font-semibold'>Add a subscription</button>
+                <button className='active:bg-black active:text-white px-2 py-1 bg-blue-400 rounded-md font-semibold focus:outline-none'>Add a subscription</button>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className='DialogOverlay'/>
@@ -75,31 +77,29 @@ export default function AddSubscriptionButton () {
                     </span>
 
                     <label className='flex flex-col mt-4'>
-                        <span className='self-start'>Choose a method</span>
-                        <select onChange={(e)=>{if(e.target.value == "new") {setFromUrl(true)} 
-                            else {setFromUrl(false)}}}
-                            className='w-[300px] bg-gray-100 rounded-md self-start p-1 px-2 mt-2'>
-                            <option value="existing">Add existing pod</option>
+                        <select value={fromUrl} onChange={(e)=>{if(e.target.value == "new") {setFromUrl('new')} 
+                            else {setFromUrl('existing')}}}
+                            className='focus:outline-none w-[300px] bg-gray-100 rounded-md self-start p-1 px-2 mt-2'>
+                            <option value="existing">Add an existing pod</option>
                             <option value="new">Add from rss feed url</option>
                         </select>
                     </label>
 
-                    { !fromUrl && <form className='flex flex-col items-end gap-2 my-5' onSubmit={handleSubmit}>
-                        <label className=''>
-                            <span className='self-start'>Choose a podcast</span>
-                            <select name="url" onChange={(e) => setSelected(e.target.value)} value={selected} className='w-[300px] bg-gray-100 rounded-md self-start p-1 px-2 mt-2'>
-                                {publications.map((publication) => {
-                                return (
-                                    <option key={publication.id} value={publication.rssFeedUrl}>{publication.title}</option>
-                                )})}
-                                <option value="daily">Daily</option>
-                            </select>
-                        </label>
-                        <input type="submit" value="Submit" className='hover:cursor-pointer self-start w-[100px]
-                            mt-2 p-1 bg-blue-400 text-white font-semibold rounded-md active:bg-black active:text-white'/>
-                    </form> }
+                    { fromUrl=='existing' && publications.length>0 && 
+                        
+                        <form className='flex flex-col items-start gap-2 my-5' onSubmit={handleSubmit}>
+                            <label className=''>
+                                <span className='self-start'>Choose a podcast</span>
+                                <SelectSearch name="url" value={selected} onChange={setSelected} search={true} options={publications.map(publication => {return {name: publication.title, value: publication.rssFeedUrl}})} />
+                            </label>
+                            <input type="submit" value="Submit" className='hover:cursor-pointer self-start w-[100px]
+                                mt-2 p-1 bg-blue-400 text-white font-semibold rounded-md active:bg-black active:text-white'/>
+                        </form> 
+                    }
 
-                    { fromUrl && 
+                    { fromUrl=='existing' && publications.length==0 && <p className='text-gray-500 italic text-xs mt-[4px] pl-[9px]'>You are subscried to all existing podcasts</p> }
+
+                    { fromUrl=='new' && 
                     <div className='mt-6'>
                     <form className='flex flex-col items-end gap-2 -mt-2' onSubmit={handleSubmit}>
                         <input type="url" name="url" placeholder="Enter rss feed url" className='w-[300px] bg-gray-100 rounded-md self-start p-1 px-2'/>

@@ -10,10 +10,10 @@ export default function UserButton() {
     const {data: session} = useSession();
 
     return (
-        <DropdownMenu.Root className='z-30'>
+        <DropdownMenu.Root className='z-50'>
         <DropdownMenu.Trigger asChild className='hover:cursor-pointer'>
-            <Avatar.Root className='h-12 w-12 z-30'>
-            <Avatar.Image src={session?.user?.image} className='rounded-full z-30'/>
+            <Avatar.Root className='h-12 w-12 z-50'>
+            <Avatar.Image src={session?.user?.image} className='rounded-full z-50'/>
             <Avatar.Fallback className='bg-gray-300 
             text-sm font-bold flex items-center justify-center 
             rounded-full h-12 w-12'>
@@ -25,7 +25,7 @@ export default function UserButton() {
         <DropdownMenu.Portal className='mr-6'>
           <DropdownMenu.Content 
             className='bg-white rounded-md shadow-lg min-w-[95px] 
-            text-black text-sm p-2 m-1 z-30 mr-6 mt-2'>
+            text-black text-sm p-2 m-1 z-50 mr-6 mt-2'>
             {!session && (
                 <>
                     <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>

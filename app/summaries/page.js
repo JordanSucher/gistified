@@ -10,38 +10,48 @@ export default async function Summaries () {
 
     let session = await getServerSession(authOptions)
 
-    let subscriptions = session ? await prisma.subscription.findMany({
-        where: {
-            userId: session.user.id
-        },
-        include: {
-            publication: true
-        }
-    }) : []
+    // let subscriptions = session ? await prisma.subscription.findMany({
+    //     where: {
+    //         userId: session.user.id
+    //     },
+    //     include: {
+    //         publication: true
+    //     }
+    // }) : []
 
-    let allEpisodeIds = []
+    // let allEpisodeIds = []
 
-    for (const subscription of subscriptions) {
-        let episodes = await prisma.episode.findMany({
-            where: {
-                publicationId: subscription.publicationId
-            }
-        })
-        allEpisodeIds.push(...episodes.map(episode=>episode.id))
+    // for (const subscription of subscriptions) {
+    //     let episodes = await prisma.episode.findMany({
+    //         where: {
+    //             publicationId: subscription.publicationId
+    //         }
+    //     })
+    //     allEpisodeIds.push(...episodes.map(episode=>episode.id))
 
-    }
+    // }
 
       let summaries = session ? await prisma.summary.findMany({
-        where: {
-            episodeId: {
-                in: allEpisodeIds
-            },
-            status: 'published'
+          where: {
+            status: 'published',
+            episode:{
+                publication:{
+                    subscriptions: {
+                        some: {
+                            userId: session.user.id
+                        }
+                    }
+                }
+            }
         },
         include: {
             episode: {
                 include: {
-                    publication: true
+                    publication: {
+                        include: {
+                            subscriptions: true
+                        }
+                    }
                 }
             }
         },
@@ -54,12 +64,14 @@ export default async function Summaries () {
     
     if (summaries.length > 0) {
         return (
-            <div className='w-full h-full max-w-[1000px] self-center md:mr-24'>
-                <span className="flex-col md:flex-row flex justify-between items-center py-2 pr-4 mb-2">
-                    <h1 className="text-xl m-0 p-0">Your Summaries</h1>
-                    <ReadFilter />
-                </span>
-                <div className="w-full px-4">
+            <div className='w-full h-full max-w-[1000px] self-center md:mr-24 overflow-y-auto'>
+                <div className="fixed z-30 bg-gray-100 w-[100%] max-w-[1000px]">
+                    <span className="z-30 bg-gray-100 flex-col flex justify-between items-start py-2 pr-4 mb-2">
+                        <h1 className="text-xl m-0 p-0">Your Summaries</h1>
+                        <ReadFilter />
+                    </span>
+                </div>
+                <div className="w-full px-4 mt-16 ">
                 {summaries.map((summary) => {
                     return (
                     <>

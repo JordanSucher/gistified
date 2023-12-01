@@ -35,9 +35,9 @@ export default function ReadFilter() {
         <form>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <label className="Label" htmlFor="airplane-mode" style={{ paddingRight: 15 }}>
-            Hide read summaries
+            Hide read
           </label>
-          <Switch.Root className="SwitchRoot z-0" id="airplane-mode" checked={readFilter} onCheckedChange={toggleReadFilter}>
+          <Switch.Root className="SwitchRoot" id="airplane-mode" checked={readFilter} onCheckedChange={toggleReadFilter}>
             <Switch.Thumb className="SwitchThumb z-0" />
           </Switch.Root>
         </div>
