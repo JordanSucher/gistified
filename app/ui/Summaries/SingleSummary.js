@@ -1,7 +1,7 @@
 'use client'
 import {useState, useEffect} from "react"
 import { DotFilledIcon } from "@radix-ui/react-icons"
-
+import { bionifyHTML, BionifyOptions, bionifyNode } from "bionify"
 
 export default function SingleSummary({id, Summary, content}) {
     // const [Summary, setSummary] = useState(null)
@@ -49,7 +49,7 @@ export default function SingleSummary({id, Summary, content}) {
             <div className="mt-5 w-full pr-[20px]">
                 <ul className="pl-8 list-disc text-sm md:text-md">  
                     {content.takeaways.map((line, i) => (
-                            <li key={i} className="mb-4 list-item">{line}</li>
+                            <li key={`takeaway-${i}`} className="mb-4 list-item" dangerouslySetInnerHTML={{__html: bionifyHTML(line) }} />
                     ))}
                 </ul>
 
@@ -57,7 +57,7 @@ export default function SingleSummary({id, Summary, content}) {
 
                 <div className="pl-8 text-sm md:text-md">
                     {content.quotes.map((line, i) => (
-                            <p key={i} className="mb-4 md:Quote ">{line}</p>
+                            <p key={`quote-${i}`} className="mb-4 md:Quote " dangerouslySetInnerHTML={{__html: bionifyHTML(line) }} />
                     ))}
                 </div>
 
@@ -65,7 +65,7 @@ export default function SingleSummary({id, Summary, content}) {
 
                 <div className="pl-8 text-sm md:text-md">
                     {content.summary.map((line, i) => (
-                        <p key={i} className="mb-4">{line}</p>
+                        <p key={`summary-${i}`} className="mb-4" dangerouslySetInnerHTML={{__html: bionifyHTML(line) }} />
                     ))}
                 </div>
 
