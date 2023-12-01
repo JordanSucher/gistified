@@ -14,7 +14,7 @@ client.defineJob({
     name: "Send emails",
     version: "0.0.1",
     trigger: cronTrigger({
-        cron: "0 8 * * *",
+        cron: "0 14 * * *",
     }),
 
     run: async (payload, io, ctx) => {
