@@ -46,8 +46,8 @@ export default function SingleSummary({id, Summary, content}) {
                 </span>
             </span>
                         
-            <div className="mt-5 w-full pr-[20px]">
-                <ul className="pl-8 list-disc text-sm md:text-md">  
+            <div className="mt-5 w-full pr-[20px] md:pr-[80px]">
+                <ul className="pl-8 list-disc text-sm md:text-lg">  
                     {content.takeaways.map((line, i) => (
                             <li key={`takeaway-${i}`} className="mb-4 list-item" dangerouslySetInnerHTML={{__html: bionifyHTML(line) }} />
                     ))}
@@ -55,7 +55,7 @@ export default function SingleSummary({id, Summary, content}) {
 
                 <hr className="mb-4 h-[2px] bg-gray-300"></hr>
 
-                <div className="pl-8 text-sm md:text-md">
+                <div className="pl-8 text-sm md:text-lg">
                     {content.quotes.map((line, i) => (
                             <p key={`quote-${i}`} className="mb-4 md:Quote " dangerouslySetInnerHTML={{__html: bionifyHTML(line) }} />
                     ))}
@@ -63,7 +63,7 @@ export default function SingleSummary({id, Summary, content}) {
 
                 <hr className="mb-4 h-[2px] bg-gray-300"></hr>
 
-                <div className="pl-8 text-sm md:text-md">
+                <div className="pl-8 text-sm md:text-lg">
                     {content.summary.map((line, i) => (
                         <p key={`summary-${i}`} className="mb-4" dangerouslySetInnerHTML={{__html: bionifyHTML(line) }} />
                     ))}

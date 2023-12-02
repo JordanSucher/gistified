@@ -5,8 +5,7 @@ import Sidenav from './ui/Sidenav'
 import LoggedOut from './ui/LoggedOut'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/authOptions'
-import { signIn } from 'next-auth/react'
-import prisma from './prisma'
+
 
 const inter = Inter({ subsets: ['latin'] })
 

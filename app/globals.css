@@ -418,3 +418,18 @@ body {
 .select-search-row:not(:last-child) .select-search-group-header {
   margin-bottom: 10px;
 }
+
+
+
+.SmallButton{
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  background-color: blue;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  color: white;
+}
+
+.SmallButton:hover{
+  background-color: black
+}
