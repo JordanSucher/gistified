@@ -59,7 +59,7 @@ export default function SummaryCard ({summary}) {
     else {
         return (
             content && <>
-                <div className='p-4 bg-gray-100 rounded-md w-[100%] flex flex-col'>
+                <div className='px-4 pt-4 bg-gray-100 rounded-md w-[100%] flex flex-col'>
                     <span className="flex justify-start items-start -ml-10">
                         {!expanded && <TriangleRightIcon onClick={()=>setExpanded(true)} className="hover:cursor-pointer select-none w-10 h-10 text-gray-500" />}
                         {expanded && <TriangleRightIcon onClick={()=>setExpanded(false)} className="hover:cursor-pointer select-none w-10 h-10 text-blue-500 transform rotate-90" />}
@@ -97,6 +97,8 @@ export default function SummaryCard ({summary}) {
 
                         </div>
                     }
+                    <hr className="h-[1px] bg-gray-300 mt-5"/>
+
                 </div>
             </>
         )

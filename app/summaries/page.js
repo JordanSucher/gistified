@@ -71,14 +71,14 @@ export default async function Summaries () {
                         <ReadFilter />
                     </span>
                 </div>
-                <div className="w-full px-4 mt-16 ">
+                <div className="w-full px-4 pt-4 mt-16 ">
                 {summaries.map((summary) => {
                     return (
                     <>
                         <SummaryCard
                         key={summary.id}
                         summary={summary}/>
-                        <hr className="h-[1px] bg-gray-300"/>
+                        {/* <hr className="h-[1px] bg-gray-300"/> */}
                     </>
                     )
                 }
