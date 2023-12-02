@@ -100,8 +100,8 @@ body {
 
 
 .SwitchRoot {
-  width: 42px;
-  height: 25px;
+  width: 36px;
+  height: 18px;
   background-color: lightgray;
   border-radius: 9999px;
   position: relative;
@@ -115,8 +115,8 @@ body {
 
 .SwitchThumb {
   display: block;
-  width: 21px;
-  height: 21px;
+  width: 14px;
+  height: 14px;
   background-color: white;
   border-radius: 9999px;
   transition: transform 100ms;
