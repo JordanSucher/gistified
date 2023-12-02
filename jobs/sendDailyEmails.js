@@ -26,6 +26,8 @@ client.defineJob({
             }
         })
 
+        console.log("users: ", users)
+
         const mailjet = new Mailjet({
             apiKey: process.env.MJ_APIKEY_PUBLIC,
             apiSecret: process.env.MJ_APIKEY_PRIVATE
@@ -75,6 +77,8 @@ client.defineJob({
                     }).filter((summary) => {
                         return summary !== ""
                     })
+
+                    console.log("summaries: ", summaries)
 
                     const request = mailjet.post('send', {'version': 'v3.1'})
                     .request({
