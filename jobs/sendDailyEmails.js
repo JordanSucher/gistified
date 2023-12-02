@@ -125,12 +125,14 @@ client.defineJob({
 
                     request.then((result) => {
                         console.log(result.body)
+                        return true
                     })
                     .catch((err) => {
                         console.log(err, err.statusCode)
+                        return false
                     })
 
-                    return true
+                    
                 }
 
             )

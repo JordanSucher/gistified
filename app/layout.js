@@ -11,7 +11,7 @@ import prisma from './prisma'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Gistification',
+  title: 'Gistified',
   description: 'Get the gist of podcast episodes',
 }
 
