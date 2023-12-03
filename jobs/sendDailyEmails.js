@@ -4,8 +4,6 @@ import { getLatestEpisodes } from "../app/lib/rss";
 import { getTranscriptSummary } from "../app/lib/openai";
 import { upsertEpisode, upsertSummary, doesTranscriptExist, 
     getTranscriptUrlFromEpisode } from "../app/lib/data";
-import AWS from "aws-sdk";
-import { sourceMapsEnabled } from "process";
 import Mailjet from 'node-mailjet';
 
 
@@ -123,14 +121,15 @@ client.defineJob({
                             }]
                     })
 
-                    request.then((result) => {
-                        console.log(result.body)
+                    try {
+                        let result = await request
+                        console.log("result: ", result.body)
                         return true
-                    })
-                    .catch((err) => {
-                        console.log(err, err.statusCode)
+                    }
+                    catch (err) {
+                        console.log(err, err)
                         return false
-                    })
+                    }
 
                     
                 }
