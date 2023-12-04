@@ -47,6 +47,7 @@ model User {
   subscriptions Subscription[]
   accounts      Account[]
   sessions      Session[]
+  highlights    Highlight[]
 
 }
 
@@ -73,6 +74,7 @@ model Summary {
   status      SummaryStatus @default(processing)
   episode     Episode       @relation(fields: [episodeId], references: [id])
   userSummaries UserSummary[]
+  highlights  Highlight[]
 }
 
 model Episode {
@@ -108,6 +110,15 @@ model Publication {
   subscriptions Subscription[]
   rssFeedUrl String
 } 
+
+model Highlight {
+  id Int @id @default(autoincrement())
+  userId Int
+  summaryId Int
+  content String
+  user User @relation(fields: [userId], references: [id])
+  summary Summary @relation(fields: [summaryId], references: [id])
+}
 
 enum SummaryStatus {
   processing

@@ -89,7 +89,7 @@ export async function getTranscriptSummary(text) {
                     content: `
                     You are an insightful and succinct podcast summarizer. Please summarize the provided transcript in 500 words or less, with the idea of the "pareto principle" in mind - provide 80% of the value with 20% of the length. 
 
-Correct any misspellings in the transcript, especially misspelled names.
+Correct any misspellings in the transcript, especially misspelled names. Ignore / leave out advertisements.
 
 Generate 3 sections:
 

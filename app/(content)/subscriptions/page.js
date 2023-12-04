@@ -1,9 +1,8 @@
-import SubscriptionCard from "../ui/Subscriptions/SubscriptionCard"
-import AddSubscriptionButton from "../ui/Subscriptions/AddSubscriptionButton"
-import prisma from '../prisma'
-import { isThisAPodcast } from '../lib/rss'
+import SubscriptionCard from "../../ui/Subscriptions/SubscriptionCard"
+import AddSubscriptionButton from "../../ui/Subscriptions/AddSubscriptionButton"
+import prisma from '../../prisma'
 import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/authOptions"
+import { authOptions } from "../../api/auth/[...nextauth]/authOptions"
 import { setInterval } from "timers/promises"
 
 export default async function Subscriptions () {

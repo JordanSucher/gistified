@@ -1,7 +1,7 @@
 'use client'
 
 import * as NavigationMenu from "@radix-ui/react-navigation-menu"
-import {HomeIcon, ListBulletIcon, GearIcon} from "@radix-ui/react-icons"
+import {HomeIcon, ListBulletIcon, GearIcon, BookmarkIcon} from "@radix-ui/react-icons"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 
@@ -54,6 +54,19 @@ export default function Sidenav() {
                     </Link>
                 </NavigationMenu.Trigger>
             </NavigationMenu.Item>
+
+            {/* <NavigationMenu.Item className={"py-2 px-2 mb-2 rounded-md" + (currPage === "highlights" ? " bg-slate-200" : "")}>
+                <NavigationMenu.Trigger asChild>
+                    <Link href="/highlights">
+                        <span className="flex items-center hover:text-blue-500">
+                            <BookmarkIcon className="w-4 h-4 mr-2" />
+                            Highlights
+                        </span>
+                    </Link>
+                </NavigationMenu.Trigger>
+            </NavigationMenu.Item> */}
+
+
                 
 
             </NavigationMenu.List>

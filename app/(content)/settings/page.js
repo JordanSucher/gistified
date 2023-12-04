@@ -1,9 +1,7 @@
-import prisma from '../prisma'
+import prisma from '../../prisma'
 import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/authOptions"
-import AddSubscriptionButton from "../ui/Subscriptions/AddSubscriptionButton"
-import ReadFilter from "../ui/Summaries/ReadFilter"
-import SettingSelector from "../ui/Settings/SettingSelector"
+import { authOptions } from "../../api/auth/[...nextauth]/authOptions"
+import SettingSelector from "../../ui/Settings/SettingSelector"
 
 export default async function Summaries () {
     

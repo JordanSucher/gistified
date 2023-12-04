@@ -1,12 +1,8 @@
 'use client'
 
-import SummaryCard from "../ui/Summaries/SummaryCard"
-import prisma from '../prisma'
-import { getServerSession } from "next-auth"
-import { useSession } from "next-auth/react"
-import { authOptions } from "../api/auth/[...nextauth]/authOptions"
-import AddSubscriptionButton from "../ui/Subscriptions/AddSubscriptionButton"
-import ReadFilter from "../ui/Summaries/ReadFilter"
+import SummaryCard from "../../ui/Summaries/SummaryCard"
+import AddSubscriptionButton from "../../ui/Subscriptions/AddSubscriptionButton"
+import ReadFilter from "../../ui/Summaries/ReadFilter"
 import { SessionProvider } from 'next-auth/react'
 import { useState, useEffect} from 'react'
 
@@ -21,7 +17,6 @@ export default function Summaries (Component) {
 
 function SummariesInner () {
     const [loading, setLoading] = useState(true)
-    const { data: session } = useSession()
     const [summaries, setSummaries] = useState([])
     const [allExpanded, setAllExpanded] = useState(false)
     const [allRead, setAllRead] = useState(null)
@@ -39,10 +34,8 @@ function SummariesInner () {
                 console.log("error", error.message)
             }
         }
-        if(session) {
-            grabSummaries()
-        }
-    }, [session])
+        grabSummaries()
+    }, [])
 
 
     if (loading == true) {
@@ -60,7 +53,6 @@ function SummariesInner () {
                     <span className="z-30 bg-gray-100 flex-col flex justify-between items-start py-2 pr-4 mb-2">
                         <h1 className="text-xl m-0 p-0">Your Summaries</h1>
                         <span className="flex">
-                        <ReadFilter readFilter={readFilter} setReadFilter={setReadFilter} />
                             <button className="SmallButton hidden md:block"
                             onClick={() => setAllExpanded(true)}>Expand all</button>
                             <button className="SmallButton hidden md:block"
@@ -69,6 +61,8 @@ function SummariesInner () {
                             onClick={() => setAllRead(true)}>Mark all as read</button>
                             <button className="SmallButton hidden md:block"
                             onClick={() => setAllRead(false)}>Mark all as unread</button>
+                            <ReadFilter readFilter={readFilter} setReadFilter={setReadFilter} />
+
                         </span>
                         <span>
                         </span>
