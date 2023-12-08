@@ -1,7 +1,8 @@
 'use client'
 import { signIn } from 'next-auth/react'
 import { Noto_Serif } from 'next/font/google'
-import { BookmarkFilledIcon } from '@radix-ui/react-icons'
+import { BookmarkFilledIcon, MagicWandIcon, BellIcon } from '@radix-ui/react-icons'
+
 
 
 const noto = Noto_Serif({ subsets: ['latin'] })
@@ -21,19 +22,19 @@ export default function LoggedOut() {
         </div>
         
         <span className='flex flex-col md:flex-row  mt-[40px] w-full justify-start gap-4'>
-            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 font-extrabold text-lg items-center gap-3">
-                <BookmarkFilledIcon className='w-12 h-12'/>
-                <p className='mr-9'>AI-generated summaries</p>
+            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
+                <MagicWandIcon className='w-10 h-10'/>
+                <p>AI-generated summaries</p>
             </div>
 
-            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 font-extrabold text-lg items-center gap-3">
-                <BookmarkFilledIcon className='w-12 h-12'/>
-                <p className='mr-9'>Daily digest sent via email</p>
+            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
+                <BellIcon className='w-10 h-10'/>
+                <p>Daily digest sent via email</p>
             </div>
 
-            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 font-extrabold text-lg items-center gap-3">
-                <BookmarkFilledIcon className='w-12 h-12'/>
-                <p className='mr-9'>Save highlights for later</p>
+            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
+                <BookmarkFilledIcon className='w-10 h-10'/>
+                <p>Save highlights for later</p>
             </div>
 
 
