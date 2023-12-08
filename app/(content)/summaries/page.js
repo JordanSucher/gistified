@@ -49,7 +49,7 @@ function SummariesInner () {
     else if (summaries.length > 0) {
         return (
             <div className='w-full h-full max-w-[1000px] self-center md:mr-24 overflow-y-auto'>
-                <div className="fixed z-30 bg-gray-100 w-[100%] max-w-[1000px]">
+                <div className="fixed z-30 bg-gray-100 w-[90%] max-w-[1000px]">
                     <span className="z-30 bg-gray-100 flex-col flex justify-between items-start py-2 pr-4 mb-2">
                         <h1 className="text-xl m-0 p-0">Your Summaries</h1>
                         <span className="flex">

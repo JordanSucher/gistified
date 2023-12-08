@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from '../../prisma'
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
+import { stat } from "fs";
 
 
 export async function GET (req) {
@@ -26,6 +27,30 @@ export async function GET (req) {
         })
     }
 
+}
+
+export async function DELETE (req) {
+    let highlightId = parseInt(req.nextUrl.searchParams.get('highlightId'))
+    let text = req.nextUrl.searchParams.get('text')
+    let session = await getServerSession(authOptions)
+
+    if (text) {
+
+    }
+        try{
+        await prisma.highlight.delete({
+            where: {
+                id: highlightId,
+                userId: session.user.id
+            }
+        })
+        return NextResponse.json({success:true}, {
+            status: 200})
+        } catch (error) {
+            console.log(error.message)
+            return NextResponse.json({success:false}, 
+                {status: 500})
+        }
 }
 
 export async function POST (req) {

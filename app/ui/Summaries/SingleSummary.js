@@ -1,20 +1,22 @@
 'use client'
-import {useState, useEffect, useRef, use} from "react"
+import {useState, useEffect, useRef} from "react"
 import { DotFilledIcon } from "@radix-ui/react-icons"
-import { bionifyHTML, BionifyOptions, bionifyNode } from "bionify"
+import { bionifyHTML } from "bionify"
 import { getSelectionDetails } from "../../lib/text"
 import SaveButton from "./SaveButton"
+import RemoveHighlightButton from "../Highlights/RemoveHighlightButton"
 
 export default function SingleSummary({id, Summary, content}) {
     let [readStatus, setReadStatus] = useState('true')
-    let [bionified, setBionified] = useState(true)
-    let bionifiedRef = useRef(true)
+    let [bionified, setBionified] = useState(false)
+    let bionifiedRef = useRef(false)
     const summaryRef = useRef(null)
     const [selectState, setSelectState] = useState(false)
     const [selectedText, setSelectedText] = useState("")
     const [selectionHeight, setSelectionHeight] = useState(0)
     const [bionifiedKey, setBionifiedKey] = useState(0)
     const [highlightedStrings, setHighlightedStrings] = useState([])
+    const [highlights, setHighlights] = useState([])
 
     const toggleReadStatus = () => {
         let curr = localStorage.getItem(`readStatus_${Summary.id}`)
@@ -29,12 +31,11 @@ export default function SingleSummary({id, Summary, content}) {
         }
     }
 
-    const highlightText = async (text) => {
+    const processHighlightText = async(text) => {
         let tosave = bionifyHTML(text) // text
         setHighlightedStrings([...highlightedStrings, tosave])
-        setSelectState(false)
         // post to DB
-        await fetch("/api/highlight", {
+        let response = await fetch("/api/highlight", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -44,6 +45,20 @@ export default function SingleSummary({id, Summary, content}) {
                 text: tosave
             }),
         })
+        let newHighlight = await response.json()
+
+        setHighlights([...highlights,newHighlight.highlight])
+
+        setSelectState(false)
+
+
+    }
+
+    const highlightText = async (text) => {
+        setSelectState(false)
+        setTimeout(() => {
+            processHighlightText(text)
+        }, 50)
     }
 
     const toggleBionify = () => {
@@ -57,6 +72,8 @@ export default function SingleSummary({id, Summary, content}) {
         const getHighlights = async () => {
             let highlights = await fetch("/api/highlight?summaryId=" + id)
             highlights = await highlights.json()
+            setHighlights(highlights)
+
             highlights = highlights.map((highlight) => {
                 return highlight.content
             })
@@ -104,69 +121,113 @@ export default function SingleSummary({id, Summary, content}) {
     },[])
 
     const checkForSelection = () => {
-        let details = getSelectionDetails()
+        setTimeout(() => {
+            let details = getSelectionDetails()
+    
+            // Check if the selection is collapsed (no selection)
+            if (!window.getSelection().toString()) {
+                setSelectState(false);
+                return;
+            }
+    
+            let stringToCheck = details?.text
+            if (bionifiedRef.current == true && stringToCheck) {
+                stringToCheck = bionifyHTML(stringToCheck)
+            }
 
-        let stringToCheck = details?.text
-        if (bionifiedRef.current == true && stringToCheck) {
-            stringToCheck = bionifyHTML(stringToCheck)
-        }
-        
-        let canWeSaveThis = document.querySelector('.SingleSummaryContainer').innerHTML.indexOf(stringToCheck) !== -1
+            console.log(highlightedStrings.includes(stringToCheck))
+            
+            let canWeSaveThis = ( document.querySelector('.SingleSummaryContainer').innerHTML.indexOf(stringToCheck) !== -1 )
+            const highlights = document.querySelectorAll('.SingleSummaryContainer span.bg-yellow-100');
+            highlights.forEach((highlight) => {
+                if (highlight.textContent.includes(stringToCheck)) {
+                    canWeSaveThis = false;
+                }
+            });
 
-        if (details?.text.split(" ").length < 2 || !canWeSaveThis) {
-            setSelectState(false)
-        }
 
-        else {
-            setSelectState(true)
-            details = getSelectionDetails()
-            setSelectedText(details.text)
-            let scrollTop = document.documentElement.scrollTop
-            setSelectionHeight(details.top + scrollTop)
-        }
+            if (details?.text.split(" ").length < 2 || !canWeSaveThis || details?.text.length == 0) {
+                setSelectState(false)
+            } else {
+                setSelectState(true)
+                setSelectedText(details.text)
+                let scrollTop = document.documentElement.scrollTop
+                setSelectionHeight(details.top + scrollTop)
+            }
+        }, 10); // A small delay so that selection text is empty if clicking away
     }
 
     useEffect(() => {
-        console.log("highlightedStrings", highlightedStrings)
         processHighlightedText()
-    }, [highlightedStrings])
+    }, [highlights])
 
     function processHighlightedText() {
-        let processedStrings = [...highlightedStrings];
+        let processedHighlights = [...highlights];
+        console.log("processedHighlights", processedHighlights)
 
-        processedStrings = processedStrings.map(string => {
+        processedHighlights = processedHighlights.map(highlight => {
+            let string = highlight.content
             if(bionified == false){
                 // replace all html tags
                 string = string.replace(/(<([^>]+)>)/ig, '')
-                return string
+                return {id: highlight.id, string: string}
             } else {
-                return string
+                return {id: highlight.id, string: string}
             }
         })
 
-        console.log("processedStrings", processedStrings)
+        console.log("processedHighlights:", processedHighlights)
 
         const container = document.querySelector('.SingleSummaryContainer');
-        let innerHTML = container?.innerHTML;
-       
-        for (let i = 0; i < processedStrings.length; i++) {   
-            const savedText = processedStrings[i];         
+        let innerHTML = container?.innerHTML
+
+        for (let i = 0; i < processedHighlights.length; i++) {   
+            const savedText = processedHighlights[i].string;
             const index = innerHTML?.indexOf(savedText);
             
             if (index >= 0) { 
                 innerHTML = innerHTML.substring(0, index) + 
-                "<span class='highlight bg-yellow-100'>" + 
-                innerHTML.substring(index, index + savedText.length) + 
-                "</span>" + 
+                "<span class='highlight bg-yellow-100 "+`highlight${processedHighlights[i].id}'>` + savedText + "</span>" + 
                 innerHTML.substring(index + savedText.length);
             }                
         }
         container.innerHTML = innerHTML;
+
+        // set button heights?
+        processedHighlights.map((x)=>{
+            // calc top
+            let top = document.querySelector(`.highlight${x.id}`).getBoundingClientRect().top
+            let scroll = document.documentElement.scrollTop
+            top += scroll
+            // get button
+            let button = document.querySelector(`.deletehighlight${x.id}`)
+            button.classList.add(`top-[${top}px]`)
+            button.style.top = top+"px"
+
+
+        })
+
     }
-    
+
+/*
+i need some way to show a delete button next to each highlight
+i can construct one per highlight, then find the relevant section of text and use that to set the top attribute?
+*/
+
+    const removeHighlight = async (i, highlight) =>{
+        const highlightElements = document.querySelectorAll(`.highlight${highlight.id}`);
+        highlightElements.forEach(x=>x.classList.remove("bg-yellow-100"))
+        setHighlightedStrings(highlightedStrings.filter(x=>x!==bionifyHTML(highlight.content)))
+        setHighlights(highlights.filter(x=>x.id!==highlight.id))
+        console.log("str", highlight.content)
+        await fetch(`/api/highlight?highlightId=${highlight.id}`,{
+            method: 'DELETE'
+        })
+    }    
+
     return (
         Summary &&
-        <div key={bionifiedKey} className='p-4 bg-gray-100 rounded-md max-w-[900px] md:mr-[10px] flex flex-col'>
+        <div key={bionifiedKey} className='p-2 md:p-4 bg-gray-100 rounded-md max-w-[900px] md:mr-[10px] flex flex-col'>
              <span className="flex justify-start items-start">
                 <img className={`w-[60px] h-[60px] select-none mt-[4px]`} src={Summary?.episode?.publication.imageurl} alt=""/> 
                 <span className=" flex justify-between items-start w-full">
@@ -182,17 +243,25 @@ export default function SingleSummary({id, Summary, content}) {
                             <DotFilledIcon onClick={toggleReadStatus} className={`w-8 h-8 hover:bg-slate-200 hover:cursor-pointer rounded-md ${readStatus == 'true'? "text-gray-300" : "text-blue-400"}`} />
                         </span>
                         <button className="SmallButton w-[60px] Bionifier" onClick={toggleBionify}>Bionify</button>
-                        <SaveButton onClick={()=>highlightText(selectedText)} className={"w-[fit-content] hidden md:inline absolute right-25" + (selectState ? " md:inline" : " md:hidden")}
-                        style={{top: (selectionHeight - 10) + "px"}}
-                        />
                     </div>
                     }
+                    <div className="flex">
+                    {selectState && <SaveButton onClick={()=>{highlightText(selectedText)}} className={"w-[fit-content] md:inline absolute right-25"}
+                    style={{top: (selectionHeight - 10) + "px"}}
+                    />}
+                    </div>
                 </span>
             </span>
             <span className="mt-[5px]">
+                <>
+                    {highlights.map((highlight,i)=>(
+                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} absolute top-0 right-[100px]`}/>
+                    ))}
+                </>
             </span>
                         
             <div className="mt-5 w-full pr-[20px] md:pr-[80px] SingleSummaryContainer" ref={summaryRef} >
+
                 <ul className="pl-8 list-disc text-sm md:text-md">  
                     {content.takeaways.map((line, i) => (
                             <li key={`takeaway-${i}`} className="mb-4 list-item" 

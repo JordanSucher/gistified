@@ -55,7 +55,7 @@ export default function Sidenav() {
                 </NavigationMenu.Trigger>
             </NavigationMenu.Item>
 
-            {/* <NavigationMenu.Item className={"py-2 px-2 mb-2 rounded-md" + (currPage === "highlights" ? " bg-slate-200" : "")}>
+            <NavigationMenu.Item className={"py-2 px-2 mb-2 rounded-md" + (currPage === "highlights" ? " bg-slate-200" : "")}>
                 <NavigationMenu.Trigger asChild>
                     <Link href="/highlights">
                         <span className="flex items-center hover:text-blue-500">
@@ -64,7 +64,7 @@ export default function Sidenav() {
                         </span>
                     </Link>
                 </NavigationMenu.Trigger>
-            </NavigationMenu.Item> */}
+            </NavigationMenu.Item>
 
 
                 
