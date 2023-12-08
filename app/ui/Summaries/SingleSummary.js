@@ -255,7 +255,7 @@ i can construct one per highlight, then find the relevant section of text and us
             <span className="mt-[5px]">
                 <>
                     {highlights.map((highlight,i)=>(
-                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} absolute top-0 right-[100px]`}/>
+                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} absolute top-0 right-2 md:right-[100px]`}/>
                     ))}
                 </>
             </span>
