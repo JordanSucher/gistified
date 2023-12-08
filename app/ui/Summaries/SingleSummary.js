@@ -227,7 +227,7 @@ i can construct one per highlight, then find the relevant section of text and us
 
     return (
         Summary &&
-        <div key={bionifiedKey} className='p-2 md:p-4 bg-gray-100 rounded-md max-w-[900px] md:mr-[10px] flex flex-col'>
+        <div key={bionifiedKey} className='p-2 md:p-4 bg-gray-100 rounded-md max-w-[900px] md:mr-[10px] md:pr-[80px] flex flex-col'>
              <span className="flex justify-start items-start">
                 <img className={`w-[60px] h-[60px] select-none mt-[4px]`} src={Summary?.episode?.publication.imageurl} alt=""/> 
                 <span className=" flex justify-between items-start w-full">
@@ -252,10 +252,10 @@ i can construct one per highlight, then find the relevant section of text and us
                     </div>
                 </span>
             </span>
-            <span className="mt-[5px]">
+            <span className="mt-[5px] flex justify-end w-[100%] relative">
                 <>
                     {highlights.map((highlight,i)=>(
-                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} absolute top-0 right-2 md:right-[100px]`}/>
+                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} fixed top-0`}/>
                     ))}
                 </>
             </span>
