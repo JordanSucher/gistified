@@ -21,7 +21,7 @@ export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions)
 
   if (  session ) return (
-    <html lang="en">
+    <html lang="en" className='w-[100vw] m-0 p-0'>
       <body className={inter.className + ' flex flex-col bg-gray-100'}>
         <Header />
         <div className={`flex grow w-full mt-[90px]`}>

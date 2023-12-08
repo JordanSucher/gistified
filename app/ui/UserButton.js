@@ -48,6 +48,9 @@ export default function UserButton() {
                     <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
                         <Link href="/summaries">Summaries</Link>
                     </DropdownMenu.Item>
+                    <DropdownMenu.Item className='hover:outline-none hover:text-blue-500 focus:none'>
+                        <Link href="/highlights">Highlights</Link>
+                    </DropdownMenu.Item>
                 </>
             )}
           
