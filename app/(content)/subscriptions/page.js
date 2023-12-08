@@ -9,6 +9,9 @@ export default async function Subscriptions () {
 
     let session = await getServerSession(authOptions)
 
+    // simulate loading
+    await new Promise (resolve => setTimeout(resolve, 3000))
+
     let subscriptions = session ? await prisma.subscription.findMany({
         where: {
             userId: session.user.id
@@ -34,7 +37,7 @@ export default async function Subscriptions () {
     if (subscriptions.length > 0) {
         return (
             <div className='w-full h-full max-w-[1000px] self-center md:mr-24'>
-                <span className="flex justify-between items-center py-2 px-4 mb-2">
+                <span className="flex flex-col justify-between items-start py-2 px-4 mb-2">
                     <h1 className="text-xl m-0 p-0">Your Subscriptions</h1>
                     <AddSubscriptionButton />
                 </span>

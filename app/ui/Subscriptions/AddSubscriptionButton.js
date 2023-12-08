@@ -64,7 +64,7 @@ export default function AddSubscriptionButton () {
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-                <button className='active:bg-black active:text-white px-2 py-1 bg-blue-400 rounded-md font-semibold focus:outline-none'>Add a subscription</button>
+                <button className='SmallButton'>Add a subscription</button>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className='DialogOverlay'/>

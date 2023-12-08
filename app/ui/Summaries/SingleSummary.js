@@ -15,6 +15,7 @@ export default function SingleSummary({id, Summary, content}) {
     const [selectedText, setSelectedText] = useState("")
     const [selectionHeight, setSelectionHeight] = useState(0)
     const [bionifiedKey, setBionifiedKey] = useState(0)
+    const bionifiedKeyRef = useRef(0)
     const [highlightedStrings, setHighlightedStrings] = useState([])
     const [highlights, setHighlights] = useState([])
 
@@ -65,6 +66,7 @@ export default function SingleSummary({id, Summary, content}) {
         setBionified(!bionified)
         bionifiedRef.current = !bionified
         setBionifiedKey(bionifiedKey + 1)
+        bionifiedKeyRef.current = bionifiedKey + 1
     }
 
     useEffect(() => {
@@ -89,7 +91,15 @@ export default function SingleSummary({id, Summary, content}) {
         localStorage.setItem(`readStatus_${id}`, "true")
     }, [id])
 
+    const handleResize = () => {
+        setBionifiedKey(bionifiedKeyRef.current + 1)
+        bionifiedKeyRef.current = bionifiedKeyRef.current + 1
+        processHighlightedText()
+        console.log("resize")
+    }
+
     useEffect(() => {
+        window.addEventListener("resize", handleResize)
         document.addEventListener('mouseup', checkForSelection)
         document.addEventListener('mousedown', (e)=>{
             try {
@@ -104,6 +114,10 @@ export default function SingleSummary({id, Summary, content}) {
             }
         })
         return () => {
+            window.removeEventListener('resize', () => {
+                processHighlightedText()
+                console.log("resize")
+            })
             document.removeEventListener('mouseup', checkForSelection)
             document.removeEventListener('mousedown', (e)=>{
                 try {
@@ -163,7 +177,6 @@ export default function SingleSummary({id, Summary, content}) {
 
     function processHighlightedText() {
         let processedHighlights = [...highlights];
-        console.log("processedHighlights", processedHighlights)
 
         processedHighlights = processedHighlights.map(highlight => {
             let string = highlight.content
@@ -175,8 +188,6 @@ export default function SingleSummary({id, Summary, content}) {
                 return {id: highlight.id, string: string}
             }
         })
-
-        console.log("processedHighlights:", processedHighlights)
 
         const container = document.querySelector('.SingleSummaryContainer');
         let innerHTML = container?.innerHTML
@@ -198,7 +209,7 @@ export default function SingleSummary({id, Summary, content}) {
             // calc top
             let top = document.querySelector(`.highlight${x.id}`).getBoundingClientRect().top
             let scroll = document.documentElement.scrollTop
-            top += scroll
+            top += scroll - 180
             // get button
             let button = document.querySelector(`.deletehighlight${x.id}`)
             button.classList.add(`top-[${top}px]`)
@@ -227,7 +238,7 @@ i can construct one per highlight, then find the relevant section of text and us
 
     return (
         Summary &&
-        <div key={bionifiedKey} className='p-2 md:p-4 bg-gray-100 rounded-md max-w-[900px] md:mr-[10px] md:pr-[80px] flex flex-col'>
+        <div key={bionifiedKey} className='p-2 md:p-4 bg-gray-100 rounded-md max-w-[900px] md:mr-[10px] flex flex-col'>
              <span className="flex justify-start items-start">
                 <img className={`w-[60px] h-[60px] select-none mt-[4px]`} src={Summary?.episode?.publication.imageurl} alt=""/> 
                 <span className=" flex justify-between items-start w-full">
@@ -252,15 +263,15 @@ i can construct one per highlight, then find the relevant section of text and us
                     </div>
                 </span>
             </span>
-            <span className="mt-[5px] flex justify-end w-[100%] relative">
+            <span className="mt-[5px] flex justify-end w-[100%] h-[100%] relative">
                 <>
                     {highlights.map((highlight,i)=>(
-                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} fixed top-0`}/>
+                        <RemoveHighlightButton key={highlight.id} callback={()=>removeHighlight(i, highlight)} highlight={highlight} classes={`deletehighlight${highlight.id} absolute top-[2000px]`}/>
                     ))}
                 </>
             </span>
                         
-            <div className="mt-5 w-full pr-[20px] md:pr-[80px] SingleSummaryContainer" ref={summaryRef} >
+            <div className="mt-5 w-full pr-[20px] md:pr-[60px] lg:pr-[100px] xl:pr-[200px] SingleSummaryContainer" ref={summaryRef} >
 
                 <ul className="pl-8 list-disc text-sm md:text-md">  
                     {content.takeaways.map((line, i) => (

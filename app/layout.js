@@ -36,7 +36,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={inter.className + ' flex flex-col bg-gray-100 w-full'}>
+      <body className={inter.className + ' flex flex-col bg-orange-800 w-full'}>
         <Header />
         <LoggedOut />
       </body>

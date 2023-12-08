@@ -15,7 +15,7 @@ export default async function Summaries () {
 
     return (
         <div className='w-full h-full max-w-[1000px] mt-[10px] self-center mx-24'>
-            <h1 className="text-3xl font-bold text-black mb-4">Settings</h1>
+            <h1 className="text-xl m-0 p-0 mb-5">Your Settings</h1>
             <SettingSelector emailPreference={user?.emailPreference} id={user?.id} />
         </div>
     )

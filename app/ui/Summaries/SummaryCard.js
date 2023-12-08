@@ -91,7 +91,7 @@ export default function SummaryCard ({summary, allExpanded, setAllExpanded, allR
                     <span className="flex justify-start items-start -ml-10">
                         {!expanded && <TriangleRightIcon onClick={()=>{setExpanded(true)}} className="hover:cursor-pointer select-none w-10 h-10 text-gray-500" />}
                         {expanded && <TriangleRightIcon onClick={()=>{setExpanded(false)}} className="hover:cursor-pointer select-none w-10 h-10 text-blue-500 transform rotate-90" />}
-                        <img className="w-[70px] h-[70px] mt-[4px] select-none hover:cursor-pointer" onClick={()=>setExpanded(!expanded)} src={summary.episode.publication.imageurl} alt=""/> 
+                        <img className="w-[70px] h-[70px] select-none hover:cursor-pointer" onClick={()=>setExpanded(!expanded)} src={summary.episode.publication.imageurl} alt=""/> 
                         <span className="flex justify-between items-start w-full">
                             <div className="ml-4 flex flex-col align-middle">
                                 <h2 className="text-xs md:text-sm">{summary.episode.publication.title}</h2>

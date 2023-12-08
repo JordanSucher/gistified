@@ -24,7 +24,7 @@ export default function HighlightCard({episode}) {
                         return (
                             <span className="flex" key={index}>
                                 <p className='m-3 italic w-[90%]'>{`"${highlight.content.replace(/(<([^>]+)>)/gi, "")}"`}</p>
-                                <RemoveHighlightButton highlight={highlight}/>
+                                <RemoveHighlightButton highlight={highlight} classes={`mt-3`}/>
                             </span>
                             
                         )
