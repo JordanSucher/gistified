@@ -35,8 +35,8 @@ export default async function Summaries () {
 
 
     return (
-        <div className='w-full h-full max-w-[1000px] mt-[10px] self-center mx-24'>
-            <h1 className="text-xl m-0 p-0 mb-10">Highlights</h1>
+        <div className='px-8 w-full h-full max-w-[1000px] mt-[10px] self-center mx-24'>
+            <h1 className="text-xl m-0 p-0 mb-5">Your Highlights</h1>
             {episodes.map((episode, index) => {
                 return (
                     <HighlightCard key={index} episode={episode} />

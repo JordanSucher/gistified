@@ -120,7 +120,7 @@ function SummariesInner () {
     else if (summaries.length > 0) {
         return (
             <div className='w-full h-full max-w-[1000px] self-center md:mr-24 overflow-y-auto'>
-                <div className="fixed z-30 bg-gray-100 w-[90%] max-w-[1000px]">
+                <div className="px-6 fixed z-30 bg-gray-100 w-[90%] max-w-[1000px]">
                     <span className="z-30 bg-gray-100 flex-col flex justify-between items-start py-2 pr-4 mb-2">
                         <h1 className="text-xl m-0 p-0 mb-1">Your Summaries</h1>
                         <span className="flex">
@@ -134,7 +134,7 @@ function SummariesInner () {
                             onClick={() => setAllRead(false)}>Mark all as unread</button>
 
                         </span>
-                        <span className="w-full flex items-center mt-2 gap-2">
+                        <span className="w-full flex md:flex-row flex-col md:items-center items-start mt-2 gap-2">
                             <div className="w-[300px]">
                                 <ReactSearchAutocomplete
                                     items={items}
@@ -156,7 +156,7 @@ function SummariesInner () {
                         </span>
                     </span>
                 </div>
-                <div className="w-full px-4 pt-4 mt-28 ">
+                <div className="w-full px-8 pt-4 mt-28 ">
                 {summaries.filter((summary=>{
                     if (selected) {
                         return summary.episode.publication.id == selected

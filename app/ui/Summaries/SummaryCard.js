@@ -97,7 +97,7 @@ export default function SummaryCard ({summary, allExpanded, setAllExpanded, allR
                                 <h2 className="text-xs md:text-sm">{summary.episode.publication.title}</h2>
                                 <h2 className="text-xs md:text-sm">{new Date(summary.episode.publishedAt).toDateString()}</h2>
                                 <Link href={`/summaries/${summary.id}`}>
-                                    <h3 className="text-md md:text-xl font-bold hover:cursor-pointer hover:text-blue-500">{summary.episode.title}</h3>
+                                    <h3 className="text-sm md:text-xl font-bold hover:cursor-pointer hover:text-blue-500">{summary.episode.title}</h3>
                                 </Link>
                             </div>
                             {readStatus && 
