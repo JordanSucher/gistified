@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
        let transcript = await generateTranscriptWithWhisper(url); 
        
        // persist the transcript to vercel blob storage
-       await axios.post('https://gistifier.vercel.app/api/transcript', { url, transcript });
+       await axios.post('https://gistified.vercel.app/api/transcript', { url, transcript });
 
    } catch (error) {
        console.log(error);

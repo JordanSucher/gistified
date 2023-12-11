@@ -460,3 +460,14 @@ body {
 .SaveButton:active{
   background-color: darkorange;
 }
+
+
+.noise {
+  /* ... */
+  filter: contrast(300%) brightness(3000%);  
+  background:
+    linear-gradient(to right, #873013, #b43a0a),
+    url(https://grainy-gradients.vercel.app/noise.svg);
+
+
+}

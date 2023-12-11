@@ -69,6 +69,6 @@ client.defineJob({
             }
             )
     
-        return "Summary created for episode " + episode.title
+        return "Summary created"
     }
 })
