@@ -103,7 +103,7 @@ client.defineJob({
                                     <span style="display: flex; align-items: center;">
                                         <img style="width: 60px; height: 60px; margin-right: 10px" src=${summary.episode.publication.imageurl} />
                                         <div>
-                                            <a href=https://gistifier.vercel.app/summaries/${summary.id}>
+                                            <a href=https://gistified.vercel.app/summaries/${summary.id}>
                                             <h2 style="margin: 0; padding: 0">${summary.episode.title}</h1>
                                             </a>
                                             <h3 style="margin: 0; padding: 0">${summary.episode.publication.title}</h2>
