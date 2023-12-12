@@ -42,19 +42,22 @@ client.defineJob({
                             episode: {
                                 publishedAt: {
                                     gte: new Date(Date.now() - 24 * 60 * 60 * 1000)
+                                },
+                                publication: {
+                                    subscriptions: {
+                                        some: {
+                                            userId: 29
+                                        }
+                                    }                  
                                 }
-                            }
+                            },
                         },
                         include: {
                             episode: {
                                 include: {
                                     publication: {
                                         include: {
-                                            subscriptions: {
-                                                where: {
-                                                    userId: user.id
-                                                }
-                                            }
+                                            subscriptions: true
                                         }
                                     }
                                 }
