@@ -101,9 +101,11 @@ export default function AddSubscriptionButton () {
 
                     { fromUrl=='new' && 
                     <div className='mt-6'>
-                    <form className='flex flex-col items-end gap-2 -mt-2' onSubmit={handleSubmit}>
+                    <form className='flex flex-col items-start gap-2 -mt-2' onSubmit={handleSubmit}>
                         <input type="url" name="url" placeholder="Enter rss feed url" className='w-[300px] bg-gray-100 rounded-md self-start p-1 px-2'/>
                         {formError && <p className='text-red-500 text-sm self-start px-1'>Invalid podcast feed</p>}
+                        <p className='text-gray-500 italic text-xs -mb-2'>The latest 3 episodes will be summarized in ~5 minutes.</p>
+                        <p className='text-gray-500 italic text-xs mb-2'>New episodes will be added automatically</p>
                         <input type="submit" value="Submit" className='hover:cursor-pointer self-start w-[100px]
                          mt-2 p-1 bg-blue-400 text-white font-semibold rounded-md active:bg-black active:text-white'/>
                     </form> 
