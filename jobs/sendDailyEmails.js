@@ -87,7 +87,7 @@ client.defineJob({
                             {
                                 "From": {
                                     "Email": "jsucher@gmail.com",
-                                    "Name": "Gistifier"
+                                    "Name": "Gistified"
                                 },
                                 "To": [
                                     {
@@ -95,8 +95,8 @@ client.defineJob({
                                         "Name": user.name
                                     }
                                 ],
-                                "Subject": "Gistifier Daily Summary",
-                                "TextPart": "Gistifier Daily Summary",
+                                "Subject": "Gistified Daily Summary",
+                                "TextPart": "Gistified Daily Summary",
                                 "HTMLPart":
                                 `
                                 ${summaries.map((summary) => {
@@ -125,8 +125,10 @@ client.defineJob({
                     })
 
                     try {
-                        let result = await request
-                        console.log("result: ", result.body)
+                        if (summaries.length > 0) {
+                            let result = await request
+                            console.log("result: ", result.body)
+                        }
                         return true
                     }
                     catch (err) {

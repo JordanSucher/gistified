@@ -85,7 +85,7 @@ client.defineJob({
                             {
                                 "From": {
                                     "Email": "jsucher@gmail.com",
-                                    "Name": "Gistifier"
+                                    "Name": "Gistified"
                                 },
                                 "To": [
                                     {
@@ -93,8 +93,8 @@ client.defineJob({
                                         "Name": user.name
                                     }
                                 ],
-                                "Subject": "Gistifier Daily Summary",
-                                "TextPart": "Gistifier Daily Summary",
+                                "Subject": "Gistified Daily Summary",
+                                "TextPart": "Gistified Daily Summary",
                                 "HTMLPart":
                                 `
                                 ${summaries.map((summary) => {
@@ -122,12 +122,14 @@ client.defineJob({
                             }]
                     })
 
-                    request.then((result) => {
-                        console.log(result.body)
-                    })
-                    .catch((err) => {
-                        console.log(err, err.statusCode)
-                    })
+                    if(summaries.length > 0) {
+                        request.then((result) => {
+                            console.log(result.body)
+                        })
+                        .catch((err) => {
+                            console.log(err, err.statusCode)
+                        })
+                    }
 
                     return true
                 }
