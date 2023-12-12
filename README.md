@@ -4,4 +4,4 @@ Gistified is a podcast condenser with quality of life features like highlight sa
 Designed for anyone whose podcast eyes are bigger than their ear stomachs.
 
 
-Built with NextJS, Whisper, GPT4Turbo, Tailwind, Lambda, ECS, Postgres.
+Built with NextJS, Whisper, GPT4Turbo, Tailwind, Lambda, ECS, Postgres, Vercel Blob Storage.
