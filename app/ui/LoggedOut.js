@@ -13,7 +13,7 @@ export default function LoggedOut() {
         <div className='-mt-[85px] md:mt-[100px] ml-4 md:ml-20'> 
         <div className={`flex flex-col gap-4 md:gap-2 mt-[200px] `}>
             <p className={`text-white text-4xl md:text-5xl font-semibold ${noto.className}`}>
-            <p>That podcast you don't have time for? Get the gist.</p>
+            <p>That podcast you dont have time for? Get the gist.</p>
             </p>
             <p className={`text-white text-xl ${noto.className}`}>
             <button onClick={()=> signIn('google')} className={`bg-black px-2 py-1 rounded-md text-white font-bold active:bg-blue-900`}>Sign in</button> 
