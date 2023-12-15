@@ -46,7 +46,7 @@ client.defineJob({
                                 publication: {
                                     subscriptions: {
                                         some: {
-                                            userId: 29
+                                            userId: user.id
                                         }
                                     }                  
                                 }
@@ -78,6 +78,10 @@ client.defineJob({
                         return summary !== ""
                     })
 
+
+                    if (summaries.length == 0) {
+                        return false
+                    }
 
                     const request = mailjet.post('send', {'version': 'v3.1'})
                     .request({
