@@ -3,7 +3,7 @@ import {getPodDetails} from "../../lib/rss";
 import prisma from '../../prisma'
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
-import { client } from "../../../trigger"
+// import { client } from "../../../trigger"
 
 
 export async function DELETE(req) {
@@ -60,13 +60,13 @@ export async function POST(req) {
         })
 
         // then, trigger job to generate summaries of latest 3 episodes
-        await client.sendEvent({
-            name: "newpod.event",
-            payload: {
-                rssFeedUrl: url,
-                title: publication.title
-            }
-        })
+        // await client.sendEvent({
+        //     name: "newpod.event",
+        //     payload: {
+        //         rssFeedUrl: url,
+        //         title: publication.title
+        //     }
+        // })
 
     }
 
