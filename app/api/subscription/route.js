@@ -59,14 +59,31 @@ export async function POST(req) {
             }
         })
 
-        // then, trigger job to generate summaries of latest 3 episodes
-        // await client.sendEvent({
-        //     name: "newpod.event",
-        //     payload: {
-        //         rssFeedUrl: url,
-        //         title: publication.title
-        //     }
-        // })
+        // 🔹 Trigger Airflow DAG via REST API
+        try {
+            let airflowResponse = await fetch("http://65.109.13.184:8080/api/v1/dags/process_new_podcast/dagRuns", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic " + Buffer.from(process.env.AIRFLOW_USERNAME + ":" + process.env.AIRFLOW_PASSWORD).toString("base64")
+                },
+                body: JSON.stringify({
+                    conf: {
+                        feed_url: url,
+                        pub_id: publication.id,
+                    }
+                })
+            });
+
+            if (!airflowResponse.ok) {
+                let errorResponse = await airflowResponse.json();
+                console.error("Airflow DAG trigger failed:", errorResponse);
+            } else {
+                console.log("Airflow DAG triggered successfully!");
+            }
+        } catch (error) {
+            console.error("Error triggering Airflow DAG:", error);
+        }
 
     }
 
