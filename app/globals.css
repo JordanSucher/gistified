@@ -422,7 +422,7 @@ body {
   margin-bottom: 10px;
 }
 
-
+/* Small Button */
 
 .SmallButton{
   padding: 0.25rem 0.5rem;
@@ -462,12 +462,9 @@ body {
 }
 
 
-.noise {
-  /* ... */
+/* .noise {
   filter: contrast(300%) brightness(3000%);  
   background:
     linear-gradient(to right, #873013, #b43a0a),
     url(https://grainy-gradients.vercel.app/noise.svg);
-
-
-}
+} */

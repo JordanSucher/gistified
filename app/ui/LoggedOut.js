@@ -1,55 +1,63 @@
 'use client'
 import { signIn } from 'next-auth/react'
-import { Noto_Serif } from 'next/font/google'
+import { Noto_Serif, Fraunces } from 'next/font/google'
 import { BookmarkFilledIcon, MagicWandIcon, BellIcon, GitHubLogoIcon } from '@radix-ui/react-icons'
-
+import ParticlesBackground from './ParticlesBackground'
 
 
 const noto = Noto_Serif({ subsets: ['latin'] })
+const fraunces = Fraunces({ subsets: ['latin'] })
 
 export default function LoggedOut() {
   
     return (
-        <div className='-mt-[85px] md:mt-[100px] ml-4 md:ml-20'> 
-        <div className={`flex flex-col gap-4 md:gap-2 mt-[200px] `}>
-            <p className={`text-white text-4xl md:text-5xl font-semibold ${noto.className}`}>
-            <p>That podcast you dont have time for? Get the gist.</p>
-            </p>
-            <p className={`text-white text-xl ${noto.className}`}>
-            <button onClick={()=> signIn('google')} className={`bg-black px-2 py-1 rounded-md text-white font-bold active:bg-blue-900`}>Sign in</button> 
-            {` to continue.`}
-            </p>
-        </div>
+        <div className='-mt-[85px] md:mt-[70px] ml-4 md:ml-[150px]'> 
         
-        <span className='flex flex-col md:flex-row  mt-[40px] w-full justify-start gap-4'>
-            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
-                <MagicWandIcon className='w-10 h-10'/>
-                <p>AI-generated summaries</p>
+            <div className="absolute inset-0 -z-10">
+                <ParticlesBackground />
             </div>
 
-            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
-                <BellIcon className='w-10 h-10'/>
-                <p>Daily digest sent via email</p>
+            
+            <div className={`flex flex-col gap-4 md:gap-2 mt-[200px] `}>
+                <div className={`text-white text-4xl md:text-6xl font-semibold ${fraunces.className}`}>
+                <p>no time for every podcast?</p>
+                <p className="mt-2">thats okay.</p>
+                </div>
             </div>
+        
+            <span className='flex flex-col md:flex-row  mt-[40px] w-full justify-start gap-4'>
+                <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
+                    <MagicWandIcon className='w-10 h-10'/>
+                    <p>AI-generated summaries</p>
+                </div>
 
-            <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
-                <BookmarkFilledIcon className='w-10 h-10'/>
-                <p>Save highlights for later</p>
-            </div>
+                <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
+                    <BellIcon className='w-10 h-10'/>
+                    <p>Daily digest sent via email</p>
+                </div>
 
+                <div className="flex w-[250px] h-[100px] rounded-md bg-gray-200 m-2 p-3 px-6 font-extrabold text-lg items-center gap-3">
+                    <BookmarkFilledIcon className='w-10 h-10'/>
+                    <p>Save highlights for later</p>
+                </div>
 
-        </span>
+            </span>
 
-        <footer className='w-full bg-white h-fit fixed left-0 bottom-0 text-xs md:text-lg'>
-            <div className='my-1 px-4 flex justify-start items-center gap-2'>
-                <span className='text-black'>© 2023, All rights reserved</span>
-                <span className='text-black'>|</span>
-                <span className='text-black'>Built by <a className='text-blue-800 font-bold' href="https://www.linkedin.com/in/jordan-sucher/">Jordan Sucher</a></span>
-                <span className='text-black'>|</span>
-                <span><a className='font-bold' href="https://github.com/jordansucher/gistifier"><GitHubLogoIcon className='w-5 h-5'/></a></span>
+            <div className='flex flex-col md:flex-row mt-[30px] w-full justify-start gap-4'>
+                <p className={`text-gray-200 text-xl`}>
+                    <button onClick={()=> signIn('google')} className={`bg-violet-700 px-2 py-1 rounded-md text-gray-100 font-bold active:bg-violet-900`}>Sign in</button> 
+                    {` to continue.`}
+                </p>
+            </div> 
 
-            </div>
-        </footer>
+            <footer className='w-full bg-zinc-900 text-white h-fit fixed left-0 bottom-0 text-xs md:text-lg'>
+                <div className='my-1 px-4 flex justify-start items-center gap-2'>
+                    <span className=''>Built by <a className='text-gray-200 font-bold hover:text-indigo-400' href="https://www.linkedin.com/in/jordan-sucher/">Jordan Sucher</a></span>
+                    <span className='text-black'>|</span>
+                    <span><a className='font-bold' href="https://github.com/jordansucher/gistifier"><GitHubLogoIcon className='w-5 h-5 hover:text-indigo-400'/></a></span>
+
+                </div>
+            </footer>
         </div>
     )
 

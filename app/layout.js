@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
 
   let session = await getServerSession(authOptions)
 
-  if (  session ) return (
+  if ( session ) return (
     <html lang="en" className='w-[100vw] m-0 p-0'>
       <body className={inter.className + ' flex flex-col bg-gray-100'}>
         <Header />
@@ -36,8 +36,8 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={inter.className + ' noise flex flex-col bg-orange-800 w-full'}>
-        <Header />
+      <body className={inter.className + ' flex flex-col bg-zinc-900 w-full'}>
+        <Header mode='loggedOut'/>
         <LoggedOut />
       </body>
     </html>
