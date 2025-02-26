@@ -3,6 +3,8 @@ import { signIn } from 'next-auth/react'
 import { Noto_Serif, Fraunces } from 'next/font/google'
 import { BookmarkFilledIcon, MagicWandIcon, BellIcon, GitHubLogoIcon } from '@radix-ui/react-icons'
 import ParticlesBackground from './ParticlesBackground'
+import Header from './Header'
+
 
 
 const noto = Noto_Serif({ subsets: ['latin'] })
@@ -12,12 +14,11 @@ export default function LoggedOut() {
   
     return (
         <div className='-mt-[85px] md:mt-[70px] ml-4 md:ml-[150px]'> 
-        
             <div className="absolute inset-0 -z-10">
                 <ParticlesBackground />
             </div>
+            <Header mode='loggedOut'/>
 
-            
             <div className={`flex flex-col gap-4 md:gap-2 mt-[200px] `}>
                 <div className={`text-white text-4xl md:text-6xl font-semibold ${fraunces.className}`}>
                 <p>no time for every podcast?</p>
@@ -50,7 +51,7 @@ export default function LoggedOut() {
                 </p>
             </div> 
 
-            <footer className='w-full bg-zinc-900 text-white h-fit fixed left-0 bottom-0 text-xs md:text-lg'>
+            <footer className='w-full bg-zinc-900 text-white h-fit fixed left-0 bottom-0 text-xs md:text-lg -z-20'>
                 <div className='my-1 px-4 flex justify-start items-center gap-2'>
                     <span className=''>Built by <a className='text-gray-200 font-bold hover:text-indigo-400' href="https://www.linkedin.com/in/jordan-sucher/">Jordan Sucher</a></span>
                     <span className='text-black'>|</span>

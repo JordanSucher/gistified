@@ -42,7 +42,7 @@ model User {
   image       String?
   password    String?
   name        String?
-  emailPreference EmailPreference @default(never)
+  emailPreference EmailPreference @default(daily)
   summaries   UserSummary[]
   subscriptions Subscription[]
   accounts      Account[]

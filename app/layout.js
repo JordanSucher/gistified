@@ -6,7 +6,6 @@ import LoggedOut from './ui/LoggedOut'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/authOptions'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -37,7 +36,6 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className + ' flex flex-col bg-zinc-900 w-full'}>
-        <Header mode='loggedOut'/>
         <LoggedOut />
       </body>
     </html>
