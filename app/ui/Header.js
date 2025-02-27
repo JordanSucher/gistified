@@ -8,10 +8,10 @@ import Link from "next/link"
 export default function Header({mode = "loggedIn"}) {
     const bgColor = mode === "loggedIn" ? "bg-white" : "bg-zinc-900"
     const textColor = mode === "loggedIn" ? "text-black" : "text-white"
-    const zIndex = mode === "loggedIn" ? "z-40" : "-z-12"
+    const zIndex = mode === "loggedIn" ? "z-40" : "-z-20"
     return (
         <SessionProvider>
-            <header className={`h-[90px] ${bgColor} px-4 md:px-7 py-4 flex justify-between items-center ${textColor} text-xxl fixed top-0 left-0 right-0 -z-20`}>
+            <header className={`h-[90px] ${bgColor} px-4 md:px-7 py-4 flex justify-between items-center ${textColor} text-xxl fixed top-0 left-0 right-0 ${zIndex}`}>
             <Link href="/" className="font-bold text-3xl z-5">Gistified</Link>
             
             { mode === "loggedIn" && <nav>
